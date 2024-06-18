@@ -8,6 +8,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return  Scaffold(
+
+      body: ElevatedButton(onPressed: (){
+        context.router.replaceNamed("/navigation");
+      }, child: const Text("Login")),
+    );
   }
 }
