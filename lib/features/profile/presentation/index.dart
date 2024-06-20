@@ -2,4 +2,4 @@
 export 'views/profile_view.dart';
 
 //manager
-export 'manager/example_bloc.dart';
+export 'manager/profile_bloc.dart';
