@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:scholariship/features/auth/domain/auth_repository.dart';
+import 'package:scholariship/features/auth/domain/repository/auth_repository.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepositoryImpl implements AuthRepository{
   final http.Client client;
-  AuthRepositoryImpl(this.client);
+  final SharedPreferences sharedPreferences;
+  AuthRepositoryImpl(this.client, this.sharedPreferences);
+
   @override
   Future<String> login ({required String email, required String password}) async{
     final url= Uri.parse('${dotenv.env['BASE_URL']!}/login');
