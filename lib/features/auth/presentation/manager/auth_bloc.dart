@@ -16,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onLogin(Login event, Emitter<AuthState> emit)async {
+      emit(Loading());
 
   }
 
