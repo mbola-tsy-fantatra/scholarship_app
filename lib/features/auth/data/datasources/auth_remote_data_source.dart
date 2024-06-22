@@ -17,7 +17,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
   AuthRemoteDataSourceImpl({required this.client});
   @override
   Future<AuthResponseModel> login(String email, String password) async{
-    final url= Uri.parse('${dotenv.env['BASE_URL']!}/login');
+    final url= Uri.parse('${dotenv.env['BASE_URL']!}/auth/login');
     final response = await client.post(
       url,
       headers: <String, String>{
@@ -28,9 +28,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
         'password': password,
       }),
     );
-    if(response.statusCode == 200){
+    if(response.statusCode == 201){
       return AuthResponseModel.fromJson(jsonDecode(response.body));
     }else{
+      print(response.statusCode);
       throw Exception('Failed to sign up');
     }
 
@@ -38,7 +39,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
 
   @override
   Future<void> register(String email, String username, String password) async {
-    final url= Uri.parse('${dotenv.env['BASE_URL']!}/register');
+    final url= Uri.parse('${dotenv.env['BASE_URL']!}/auth/register');
     final response = await http.post(
       url,
       headers: <String, String>{
@@ -51,9 +52,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
 
     } else {
+      print(response.statusCode);
       throw Exception('Failed to sign up');
     }
   }
