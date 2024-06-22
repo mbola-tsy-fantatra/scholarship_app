@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholariship/features/auth/presentation/index.dart';
 import 'package:scholariship/features/auth/presentation/widgets/login_form.dart';
 import 'package:scholariship/features/auth/presentation/widgets/register_form.dart';
+
+import '../../../../core/config/injection_container.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -42,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500
                       ),
                     ),
-                    const LoginForm(),
+                    buildBody(context),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -76,4 +80,12 @@ class LoginScreen extends StatelessWidget {
           ),
         ));
   }
+}
+
+
+BlocProvider<AuthBloc> buildBody(BuildContext context){
+  return
+    BlocProvider(create: (context)=> sl<AuthBloc>(),
+      child: const LoginForm(),
+    );
 }

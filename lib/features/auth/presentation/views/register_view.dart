@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholariship/features/auth/presentation/widgets/register_form.dart';
+
+import '../../../../core/config/injection_container.dart';
+import '../manager/auth_bloc.dart';
 
 
 @RoutePage()
@@ -42,7 +46,7 @@ class RegisterScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500
                       ),
                     ),
-                    const RegisterForm(),
+                    buildBody(context),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -76,4 +80,10 @@ class RegisterScreen extends StatelessWidget {
           ),
         ));
   }
+}
+BlocProvider<AuthBloc> buildBody(BuildContext context){
+  return
+    BlocProvider(create: (context)=> sl<AuthBloc>(),
+      child: const RegisterForm(),
+    );
 }
