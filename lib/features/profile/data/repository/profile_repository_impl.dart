@@ -4,7 +4,7 @@ import 'package:scholariship/features/profile/domain/repository/profile_reposito
 import 'package:scholariship/global/error/exeception.dart';
 import 'package:scholariship/global/error/failure.dart';
 
-import '../models/user_model.dart';
+import '../../domain/entities/user.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository{
   final UserRemoteDataSource remoteDataSource;
@@ -12,7 +12,7 @@ class ProfileRepositoryImpl implements ProfileRepository{
   ProfileRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, UserModel>>? getUserProfileInfo() async{
+  Future<Either<Failure, User>>? getUserProfileInfo() async{
     try{
         final response = await remoteDataSource.getUserProfileInfo();
         return Right(response!);
