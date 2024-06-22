@@ -10,8 +10,9 @@ class NavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
+        HomeRoute(),
         ScholarshipRoute(),
-        ProfileRoute(),
+        // ProfileRoute(),
         MessageRoute(),
         NotificationRoute(),
       ],
@@ -36,9 +37,13 @@ class NavigationScreen extends StatelessWidget {
                 icon: Icon(Icons.home),
               ),
               BottomNavigationBarItem(
-                label: 'Profile',
-                icon: Icon(Icons.account_circle),
+                label: 'Scholarship',
+                icon: Icon(Icons.book),
               ),
+              // BottomNavigationBarItem(
+              //   label: 'Profile',
+              //   icon: Icon(Icons.account_circle),
+              // ),
               BottomNavigationBarItem(
                 label: 'Messages',
                 icon: Icon(Icons.message),

@@ -20,8 +20,9 @@ class AppRouter extends $AppRouter {
         path:'/navigation',
         page: NavigationRoute.page,
         children: [
+          AutoRoute(page: HomeRoute.page),
           AutoRoute(page: ScholarshipRoute.page),
-          AutoRoute(page: ProfileRoute.page),
+          // AutoRoute(page: ProfileRoute.page),
           AutoRoute(page: MessageRoute.page),
           AutoRoute(page: NotificationRoute.page),
         ]

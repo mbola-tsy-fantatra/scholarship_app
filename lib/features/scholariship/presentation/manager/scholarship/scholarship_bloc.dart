@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:scholariship/features/home/domain/entities/sholarship.dart';
-
-import '../../../../global/utils/map_failure_message.dart';
-import '../../domain/usecases/find_scholarship.dart';
+import '../../../../../global/utils/map_failure_message.dart';
+import '../../../domain/entities/sholarship.dart';
+import '../../../domain/usecases/find_scholarship.dart';
 
 part 'scholarship_event.dart';
 part 'scholarship_state.dart';

@@ -1,4 +1,6 @@
-import 'package:scholariship/features/home/domain/entities/sholarship.dart';
+
+
+import '../../domain/entities/sholarship.dart';
 
 class ScholarshipModel extends Scholarship{
   const ScholarshipModel({required super.scholarshipId, required super.title, required super.name, required super.requirements, required super.applicationStartDate, required super.applicationEndDate, required super.officialLink, required super.organizationName, required super.coverPhotoUrl});

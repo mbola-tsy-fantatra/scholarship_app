@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:scholariship/core/usecases/usecase.dart';
-import 'package:scholariship/features/home/domain/entities/sholarship.dart';
-import 'package:scholariship/features/home/domain/repository/scholarship_repository.dart';
 import 'package:scholariship/global/error/failure.dart';
+
+import '../entities/sholarship.dart';
+import '../repository/scholarship_repository.dart';
 
 class FindScholarship extends UseCase<List<Scholarship>,Params>{
   final ScholarshipRepository scholarshipRepository;

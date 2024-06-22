@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:scholariship/features/home/data/datasources/scholarship_remote_data_source.dart';
-import 'package:scholariship/features/home/domain/entities/sholarship.dart';
-import 'package:scholariship/features/home/domain/repository/scholarship_repository.dart';
 import 'package:scholariship/global/error/exeception.dart';
 import 'package:scholariship/global/error/failure.dart';
+
+import '../../domain/entities/sholarship.dart';
+import '../../domain/repository/scholarship_repository.dart';
+import '../datasources/scholarship_remote_data_source.dart';
 
 class ScholarshipRepositoryImpl implements ScholarshipRepository{
   final ScholarshipRemoteDataSource remoteDataSource;
