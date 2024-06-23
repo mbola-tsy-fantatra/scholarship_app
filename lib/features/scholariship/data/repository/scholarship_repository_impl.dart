@@ -1,4 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:scholariship/features/scholariship/domain/entities/academic.dart';
+import 'package:scholariship/features/scholariship/domain/entities/country.dart';
+import 'package:scholariship/features/scholariship/domain/entities/studyLevel.dart';
 import 'package:scholariship/global/error/exeception.dart';
 import 'package:scholariship/global/error/failure.dart';
 
@@ -16,6 +19,36 @@ class ScholarshipRepositoryImpl implements ScholarshipRepository{
     try{
       final scholarships = await remoteDataSource.findScholarship(location, studyLevel, studyField);
       return Right(scholarships);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Academic>>>? getAcademics() async{
+    try{
+      final academics = await remoteDataSource.getAcademics();
+      return Right(academics);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Country>>>? getCountry() async{
+    try{
+      final countries = await remoteDataSource.getCountry();
+      return Right(countries);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<StudyLevel>>>? getStudyLevels() async{
+    try{
+      final studyLevels = await remoteDataSource.getStudyLevel();
+      return Right(studyLevels);
     }on ServerException{
       return Left(ServerFailure());
     }

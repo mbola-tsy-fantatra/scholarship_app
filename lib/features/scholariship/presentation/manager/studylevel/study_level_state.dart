@@ -9,23 +9,23 @@ class Empty extends StudyLevelState {
   List<Object> get props => [];
 }
 
-class Loading extends StudyLevelState {
+class StudyLevelLoading extends StudyLevelState {
 
   @override
   List<Object?> get props => [];
 }
 
-class Loaded extends StudyLevelState {
-  final StudyLevel studyLevel;
-  const Loaded({required this.studyLevel});
+class StudyLevelLoaded extends StudyLevelState {
+  final List<StudyLevel> studyLevel;
+  const StudyLevelLoaded({required this.studyLevel});
 
   @override
   List<Object?> get props => [studyLevel];
 }
 
-class ErrorState extends StudyLevelState {
+class StudyLevelErrorState extends StudyLevelState {
   final String message;
-  const ErrorState({required this.message});
+  const StudyLevelErrorState({required this.message});
 
   @override
   List<Object?> get props => [message];

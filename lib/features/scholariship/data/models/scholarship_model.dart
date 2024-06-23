@@ -3,25 +3,38 @@
 import '../../domain/entities/sholarship.dart';
 
 class ScholarshipModel extends Scholarship{
-  const ScholarshipModel({required super.scholarshipId, required super.title, required super.name, required super.requirements, required super.applicationStartDate, required super.applicationEndDate, required super.officialLink, required super.organizationName, required super.coverPhotoUrl});
+  const ScholarshipModel({required super.id,
+    // required super.title,
+    required super.name,  required super.applicationStartDate,
+    required super.applicationEndDate, required super.officialLink, required super.organizationName,
+    required super.coverPhoto, required super.fundingType, required super.applicationStartPeriod,
+    required super.description});
 
 
   factory ScholarshipModel.fromJson(Map<String,dynamic> json){
     return ScholarshipModel(
-        scholarshipId: json['scholarshipId'], title: json['title'], name: json['name'],
-        requirements: json['requirements'], applicationStartDate: json['applicationStartDate'],
-        applicationEndDate: json['applicationEndDate'], officialLink: json['officialLink'], organizationName: json['organizationName'],
-        coverPhotoUrl: json['coverPhotoUrl']
+        id: json['id'],
+        // title: json['title'],
+        name: json['name'],
+        applicationStartDate: DateTime.parse(json['startApplicationDate']),
+        applicationEndDate: DateTime.parse(json['endApplicationDate']),
+        officialLink: json['officialLink'],
+        organizationName: json['organizationName'],
+        coverPhoto: json['coverPhoto'],
+        fundingType: json['fundingType'],
+        applicationStartPeriod: json['applicationStartPeriod'],
+        description: json['description'],
     );
   }
 
   Map<String,dynamic> toJson(){
     return {
-      'scholarshipId':scholarshipId,
-      'requirements':requirements,
+      'id':id,
       'applicationEndDate':applicationEndDate,
-      'coverPhotoUrl':coverPhotoUrl,
-      'title':title,
+      'coverPhotoUrl':coverPhoto,
+      'description': description,
+      'applicationStartPeriod': applicationStartPeriod,
+      // 'title':title,
       'name':name,
       'officialLink':officialLink,
       'applicationStart':applicationStartDate,

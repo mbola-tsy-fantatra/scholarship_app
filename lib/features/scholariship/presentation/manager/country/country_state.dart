@@ -9,23 +9,23 @@ class Empty extends CountryState {
   List<Object> get props => [];
 }
 
-class Loading extends CountryState {
+class CountryLoading extends CountryState {
 
   @override
   List<Object?> get props => [];
 }
 
-class Loaded extends CountryState {
-  final Country country;
-  const Loaded({required this.country});
+class CountryLoaded extends CountryState {
+  final List<Country> country;
+  const CountryLoaded({required this.country});
 
   @override
   List<Object?> get props => [country];
 }
 
-class ErrorState extends CountryState {
+class CountryErrorState extends CountryState {
   final String message;
-  const ErrorState({required this.message});
+  const CountryErrorState({required this.message});
 
   @override
   List<Object?> get props => [message];

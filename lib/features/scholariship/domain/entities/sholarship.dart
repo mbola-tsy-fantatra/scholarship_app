@@ -1,19 +1,21 @@
 import 'package:equatable/equatable.dart';
 
 class Scholarship extends Equatable{
-  final String scholarshipId;
-  final String title;
+  final String id;
+  // final String title;
   final String name;
-  final String requirements;
+  final String description;
   final DateTime applicationStartDate;
   final DateTime applicationEndDate;
   final String officialLink;
   final String organizationName;
-  final String coverPhotoUrl;
+  final String coverPhoto;
+  final String applicationStartPeriod;
+  final String fundingType;
 
-  const Scholarship({required this.scholarshipId, required this.title, required this.name, required this.requirements, required this.applicationStartDate, required this.applicationEndDate, required this.officialLink, required this.organizationName, required this.coverPhotoUrl});
+  const Scholarship({required this.fundingType,required this.applicationStartPeriod,required this.description,required this.id, required this.name, required this.applicationStartDate, required this.applicationEndDate, required this.officialLink, required this.organizationName, required this.coverPhoto});
 
   @override
-  List<Object?> get props => [scholarshipId,title,name,requirements,applicationEndDate,applicationStartDate,officialLink,organizationName,coverPhotoUrl];
+  List<Object?> get props => [id,name,applicationStartDate,officialLink,organizationName,coverPhoto];
 
 }

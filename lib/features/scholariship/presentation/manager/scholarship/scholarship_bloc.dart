@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:scholariship/features/scholariship/data/request/create_scholarship.dart';
 import '../../../../../global/utils/map_failure_message.dart';
 import '../../../domain/entities/sholarship.dart';
 import '../../../domain/usecases/find_scholarship.dart';

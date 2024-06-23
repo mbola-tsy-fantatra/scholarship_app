@@ -16,11 +16,11 @@ class Loading extends AcademicState {
 }
 
 class Loaded extends AcademicState {
-  final Academic academic;
-  const Loaded({required this.academic});
+  final List<Academic> academics;
+  const Loaded({required this.academics});
 
   @override
-  List<Object?> get props => [academic];
+  List<Object?> get props => [academics];
 }
 
 class ErrorState extends AcademicState {

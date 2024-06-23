@@ -14,3 +14,13 @@ class SearchScholarship extends ScholarshipEvent{
   List<Object?> get props => [country,studyLevel,query];
 
 }
+
+class CreateScholarshipEvent extends ScholarshipEvent{
+  final CreateScholarship createScholarship;
+
+  const CreateScholarshipEvent({required this.createScholarship});
+
+  @override
+  List<Object?> get props => [createScholarship];
+
+}

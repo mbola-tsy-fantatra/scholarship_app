@@ -5,12 +5,12 @@ class CountryModel extends Country{
 
 
   factory CountryModel.fromJson(Map<String,dynamic> json){
-    return CountryModel(countryId: json['countryId'], name: json['name']);
+    return CountryModel(countryId: json['id'], name: json['name']);
   }
 
   Map<String,dynamic> toJson(){
     return {
-      'countryId':countryId,
+      'id':countryId,
       'name':name
     };
   }

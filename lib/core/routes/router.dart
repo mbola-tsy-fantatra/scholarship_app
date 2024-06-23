@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:scholariship/core/routes/router.gr.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../config/injection_container.dart';
+import 'auth_guard.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route'  )
 class AppRouter extends $AppRouter {
@@ -8,7 +12,7 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
     /// routes go here
     AutoRoute(
-        path: '/',
+        path: '/login',
         page: LoginRoute.page
     ),
     AutoRoute(
@@ -17,8 +21,10 @@ class AppRouter extends $AppRouter {
     ),
     AutoRoute(page: PasswordRecoveryRoute.page),
     AutoRoute(
-        path:'/navigation',
+        path:'/',
+        initial: true,
         page: NavigationRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())],
         children: [
           AutoRoute(page: HomeRoute.page),
           AutoRoute(page: ScholarshipRoute.page),
@@ -26,6 +32,11 @@ class AppRouter extends $AppRouter {
           AutoRoute(page: MessageRoute.page),
           AutoRoute(page: NotificationRoute.page),
         ]
+    ),
+    AutoRoute(
+        path: '/create-scholarship',
+        page: ScholarshipCreationRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     )
   ];
 }
