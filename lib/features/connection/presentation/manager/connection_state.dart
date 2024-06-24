@@ -1,4 +1,4 @@
-part of 'example_bloc.dart';
+part of 'connection_bloc.dart';
 
 abstract class ExampleState extends Equatable {
   const ExampleState();

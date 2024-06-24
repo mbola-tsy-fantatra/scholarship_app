@@ -16,13 +16,13 @@ import 'package:scholariship/features/auth/presentation/views/password_recovery_
     as _i7;
 import 'package:scholariship/features/auth/presentation/views/register_view.dart'
     as _i9;
-import 'package:scholariship/features/connections/presentation/views/connnection_view.dart'
+import 'package:scholariship/features/connection/presentation/views/connnection_view.dart'
     as _i1;
 import 'package:scholariship/features/home/presentation/views/home_view.dart'
     as _i2;
 import 'package:scholariship/features/messages/presentation/views/message_view.dart'
     as _i4;
-import 'package:scholariship/features/notification/presentation/views/notification_view.dart'
+import 'package:scholariship/features/notifications/presentation/views/notification_view.dart'
     as _i6;
 import 'package:scholariship/features/profile/presentation/views/profile_view.dart'
     as _i8;
