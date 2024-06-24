@@ -29,7 +29,6 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
   @override
   Future<List<ScholarshipModel>> findScholarship(String location, String studyLevel, String studyField) async {
     final String? token = sharedPreferences.getString('access_token');
-
     Map<String, String> queryParams = {};
     if (location.isNotEmpty) {
       queryParams['hostCountry'] = location;
