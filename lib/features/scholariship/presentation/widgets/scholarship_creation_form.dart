@@ -9,6 +9,9 @@ import '../manager/scholarship/scholarship_bloc.dart';
 import '../manager/studylevel/study_level_bloc.dart';
 
 class CreateScholarshipForm extends StatefulWidget {
+
+  const CreateScholarshipForm({super.key});
+
   @override
   _CreateScholarshipFormState createState() => _CreateScholarshipFormState();
 }
@@ -41,7 +44,6 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
       hostCountriesIds: hostCountriesIds,
       studyLevelsIds: studyLevelsIds,
     );
-    print(scholarship);
     BlocProvider.of<ScholarshipBloc>(context).add(CreateScholarshipEvent(createScholarship: scholarship));
   }
   @override
@@ -121,9 +123,9 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                 onSaved: (value) {
                   officialLink = value!;
                 },
-                decoration: InputDecoration(
+                decoration:  InputDecoration(
                   hintText: "Lien officiel",
-                  prefixIcon: const Icon(Icons.link),
+                  prefixIcon: Icon(Icons.link),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -162,9 +164,9 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                 onSaved: (value) {
                   organizationName = value!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Nom de l'organisation",
-                  prefixIcon: const Icon(Icons.business),
+                  prefixIcon: Icon(Icons.business),
                   border: OutlineInputBorder(),
                 ),
               ),

@@ -123,24 +123,22 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
       var request = http.MultipartRequest('POST', url)
         ..headers['Authorization'] = 'Bearer $token'
         ..fields['name'] = scholarship.name
-        ..fields['officialLink'] = scholarship.officialLink ?? ''
+        ..fields['officialLink'] = scholarship.officialLink
         ..fields['description'] = scholarship.description
         ..fields['organizationName'] = scholarship.organizationName
         ..fields['fundingType'] = scholarship.fundingType
         ..fields['startApplicationDate'] = scholarship.startApplicationDate.toIso8601String()
         ..fields['endApplicationDate'] = scholarship.endApplicationDate.toIso8601String()
         ..fields['applicationStartPeriod'] = scholarship.applicationStartPeriod
-        ..fields['hostCountriesIds'] = json.encode(scholarship.hostCountriesIds)
-        ..fields['studyLevelsIds'] = json.encode(scholarship.studyLevelsIds)
         ..files.add(await http.MultipartFile.fromPath(
           'coverPhoto',
           scholarship.coverPhoto.path,
         ));
         for(int i=0; i< scholarship.hostCountriesIds.length; i++){
-          request.fields['hostCountriesIds${[i]}']= scholarship.hostCountriesIds[i] as String;
+          request.fields['hostCountriesIds${[i]}']= scholarship.hostCountriesIds[i].toString() ;
         }
       for(int i=0; i< scholarship.studyLevelsIds.length; i++){
-        request.fields['studyLevelsIds${[i]}']= scholarship.studyLevelsIds[i] as String;
+        request.fields['studyLevelsIds${[i]}']= scholarship.studyLevelsIds[i].toString() ;
       }
       print(request.fields);
       print(request.files);
