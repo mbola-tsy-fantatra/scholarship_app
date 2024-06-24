@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:scholariship/features/scholariship/data/request/create_scholarship.dart';
 import 'package:scholariship/features/scholariship/domain/entities/academic.dart';
 import 'package:scholariship/features/scholariship/domain/entities/country.dart';
 import 'package:scholariship/features/scholariship/domain/entities/studyLevel.dart';
 import 'package:scholariship/global/error/exeception.dart';
 import 'package:scholariship/global/error/failure.dart';
-
 import '../../domain/entities/sholarship.dart';
 import '../../domain/repository/scholarship_repository.dart';
 import '../datasources/scholarship_remote_data_source.dart';
@@ -49,6 +49,16 @@ class ScholarshipRepositoryImpl implements ScholarshipRepository{
     try{
       final studyLevels = await remoteDataSource.getStudyLevel();
       return Right(studyLevels);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Scholarship>> createScholarship(CreateScholarship createScholarship) async{
+    try{
+      final scholarship = await remoteDataSource.createScholarship(createScholarship);
+      return Right(scholarship);
     }on ServerException{
       return Left(ServerFailure());
     }

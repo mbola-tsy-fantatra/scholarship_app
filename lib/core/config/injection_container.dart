@@ -17,6 +17,7 @@ import 'package:scholariship/features/profile/presentation/manager/profile_bloc.
 import 'package:scholariship/features/scholariship/data/datasources/scholarship_remote_data_source.dart';
 import 'package:scholariship/features/scholariship/data/repository/scholarship_repository_impl.dart';
 import 'package:scholariship/features/scholariship/domain/repository/scholarship_repository.dart';
+import 'package:scholariship/features/scholariship/domain/usecases/create_scholarship.dart';
 import 'package:scholariship/features/scholariship/domain/usecases/find_scholarship.dart';
 import 'package:scholariship/features/scholariship/domain/usecases/get_academics.dart';
 import 'package:scholariship/features/scholariship/domain/usecases/get_countries.dart';
@@ -77,10 +78,11 @@ Future<void> init()async {
   sl.registerFactory(()=>CountryBloc(sl()));
   sl.registerFactory(()=>StudyLevelBloc(sl()));
   sl.registerFactory(()=>AcademicBloc(sl()));
-  sl.registerFactory(()=>ScholarshipBloc(sl()));
+  sl.registerFactory(()=>ScholarshipBloc(sl(),sl()));
 
 
   //UseCases
+  sl.registerLazySingleton(()=>CreateScholarshipCase(scholarshipRepository: sl()));
   sl.registerLazySingleton(()=> GetCountries(scholarshipRepository: sl()));
   sl.registerLazySingleton(()=>GetStudyLevels(scholarshipRepository: sl()));
   sl.registerLazySingleton(()=>GetAcademics(scholarshipRepository: sl()));

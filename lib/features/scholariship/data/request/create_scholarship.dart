@@ -64,14 +64,13 @@ class CreateScholarship extends Equatable {
       'name': name,
       'officialLink': officialLink,
       'description': description,
-      'coverPhoto': coverPhoto.path,
       'organizationName': organizationName,
-      'fundingType': fundingType,
+      'fundingType': fundingType.toString(),
       'startApplicationDate': startApplicationDate.toIso8601String(),
       'endApplicationDate': endApplicationDate.toIso8601String(),
       'applicationStartPeriod': applicationStartPeriod,
-      'hostCountriesIds': hostCountriesIds,
-      'studyLevelsIds': studyLevelsIds,
+      'hostCountriesIds': hostCountriesIds.map((id) => id.toString()).toList(),
+      'studyLevelsIds': studyLevelsIds.map((id) => id.toString()).toList(),
     };
   }
 }

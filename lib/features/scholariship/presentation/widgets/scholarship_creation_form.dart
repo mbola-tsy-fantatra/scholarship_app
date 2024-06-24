@@ -41,6 +41,7 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
       hostCountriesIds: hostCountriesIds,
       studyLevelsIds: studyLevelsIds,
     );
+    print(scholarship);
     BlocProvider.of<ScholarshipBloc>(context).add(CreateScholarshipEvent(createScholarship: scholarship));
   }
   @override
@@ -106,7 +107,7 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                 onSaved: (value) {
                   name = value!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Nom",
                   prefixIcon: const Icon(Icons.text_fields),
                   border: OutlineInputBorder(),
@@ -134,11 +135,11 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                   }
                   return null;
                 },
-                maxLines: null, // Pour permettre plusieurs lignes
+                maxLines: null,
                 onSaved: (value) {
                   description = value!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Description",
                   prefixIcon: const Icon(Icons.description),
                   border: OutlineInputBorder(),

@@ -4,6 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:scholariship/features/scholariship/data/models/academic_model.dart';
 import 'package:scholariship/features/scholariship/data/models/country_model.dart';
 import 'package:scholariship/features/scholariship/data/models/study_level_model.dart';
+import 'package:scholariship/features/scholariship/data/request/create_scholarship.dart';
+import 'package:scholariship/features/scholariship/domain/entities/sholarship.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../global/error/exeception.dart';
@@ -12,6 +14,7 @@ import 'package:http/http.dart' as http;
 
 abstract class ScholarshipRemoteDataSource{
   Future<List<ScholarshipModel>> findScholarship(String location,String studyLevel,String studyField);
+  Future<Scholarship> createScholarship(CreateScholarship scholarship);
   Future<List<AcademicModel>> getAcademics();
   Future<List<CountryModel>> getCountry();
   Future<List<StudyLevelModel>> getStudyLevel();
@@ -108,6 +111,49 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
       return data.map((item) => StudyLevelModel.fromJson(item)).toList();
     } else {
       throw Exception('Failed to load study levels');
+    }
+  }
+
+  @override
+  Future<Scholarship> createScholarship(CreateScholarship scholarship) async {
+    final String? token = sharedPreferences.getString('access_token');
+    final url = Uri.parse('${dotenv.env['BASE_URL']!}/scholarships');
+
+    try {
+      var request = http.MultipartRequest('POST', url)
+        ..headers['Authorization'] = 'Bearer $token'
+        ..fields['name'] = scholarship.name
+        ..fields['officialLink'] = scholarship.officialLink ?? ''
+        ..fields['description'] = scholarship.description
+        ..fields['organizationName'] = scholarship.organizationName
+        ..fields['fundingType'] = scholarship.fundingType
+        ..fields['startApplicationDate'] =
+        scholarship.startApplicationDate.toIso8601String()
+        ..fields['endApplicationDate'] =
+        scholarship.endApplicationDate.toIso8601String()
+        ..fields['applicationStartPeriod'] = scholarship.applicationStartPeriod
+        ..fields['hostCountriesIds'] =
+        json.encode(scholarship.hostCountriesIds.map((id) => id.toString()).toList())
+        ..fields['studyLevelsIds'] =
+        json.encode(scholarship.studyLevelsIds.map((id) => id.toString()).toList())
+        ..files.add(await http.MultipartFile.fromPath(
+          'coverPhoto',
+          scholarship.coverPhoto.path,
+        ));
+      print(request.fields);
+      print(request.files);
+      var response = await request.send();
+
+      if (response.statusCode == 201) {
+        final responseBody = await response.stream.bytesToString();
+        return ScholarshipModel.fromJson(jsonDecode(responseBody));
+      } else {
+        final responseBody = await response.stream.bytesToString();
+        throw Exception('Failed to create scholarship: $responseBody');
+      }
+    } catch (e) {
+      print('Error creating scholarship: $e');
+      throw Exception('Failed to create scholarship: $e');
     }
   }
 }

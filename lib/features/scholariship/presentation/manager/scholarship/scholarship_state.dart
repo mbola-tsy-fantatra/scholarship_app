@@ -23,6 +23,12 @@ class Loaded extends ScholarshipState {
   List<Object?> get props => [scholarships];
 }
 
+class CreateLoaded extends ScholarshipState{
+  @override
+  List<Object?> get props => [];
+
+}
+
 class ErrorState extends ScholarshipState {
   final String message;
   const ErrorState({required this.message});
