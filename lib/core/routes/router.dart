@@ -37,6 +37,10 @@ class AppRouter extends $AppRouter {
         path: '/create-scholarship',
         page: ScholarshipCreationRoute.page,
         guards: [AuthGuard(sl<SharedPreferences>())]
+    ),
+    AutoRoute(
+        path: '/setting',
+        page:SettingRoute.page
     )
   ];
 }

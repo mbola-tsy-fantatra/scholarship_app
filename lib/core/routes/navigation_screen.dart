@@ -24,12 +24,12 @@ class NavigationScreen extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {
-
                   },
                 ),
                 IconButton(
                   icon: const Icon(Icons.settings),
                   onPressed: () {
+                      context.router.push(SettingRoute());
 
                   },
                 ),

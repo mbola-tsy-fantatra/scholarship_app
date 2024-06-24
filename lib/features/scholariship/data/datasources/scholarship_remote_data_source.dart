@@ -136,6 +136,12 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
           'coverPhoto',
           scholarship.coverPhoto.path,
         ));
+        for(int i=0; i< scholarship.hostCountriesIds.length; i++){
+          request.fields['hostCountriesIds${[i]}']= scholarship.hostCountriesIds[i] as String;
+        }
+      for(int i=0; i< scholarship.studyLevelsIds.length; i++){
+        request.fields['studyLevelsIds${[i]}']= scholarship.studyLevelsIds[i] as String;
+      }
       print(request.fields);
       print(request.files);
       var response = await request.send();
