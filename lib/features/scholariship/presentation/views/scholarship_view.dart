@@ -92,11 +92,11 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
                       setState(() {
                         selectedCountry = newValue;
                       });
-                      _search(); // Déclencher la recherche lorsque le pays est sélectionné
+                      _search();
                     },
                     items: state.country.map<DropdownMenuItem<String>>((Country country) {
                       return DropdownMenuItem<String>(
-                        value: country.name,
+                        value: country.countryId.toString(),
                         child: Text(country.name),
                       );
                     }).toList(),
@@ -121,11 +121,11 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
                       setState(() {
                         selectedStudyLevel = newValue;
                       });
-                      _search(); // Déclencher la recherche lorsque le niveau d'étude est sélectionné
+                      _search();
                     },
                     items: state.studyLevel.map<DropdownMenuItem<String>>((StudyLevel level) {
                       return DropdownMenuItem<String>(
-                        value: level.name,
+                        value: level.id.toString(),
                         child: Text(level.name),
                       );
                     }).toList(),
@@ -143,11 +143,11 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
               decoration: const InputDecoration(
                 labelText: 'Search Field',
               ),
-              onChanged: (_) => _search(), // Déclencher la recherche lorsque le texte est modifié
+              onChanged: (_) => _search(),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: _search, // Déclencher la recherche lorsque le bouton est pressé
+              onPressed: _search,
               child: const Text('Search Scholarships'),
             ),
             const SizedBox(height: 16.0),
