@@ -11,6 +11,7 @@ class Logout extends UseCase<bool,NoParams>{
 
   @override
   Future<Either<Failure, bool>?> call(params)async {
+    print("mandeha ve ");
      try{
        await sharedPreferences.remove('access_token');
        return const Right(true);
