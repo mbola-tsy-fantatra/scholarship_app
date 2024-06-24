@@ -30,7 +30,7 @@ class LoginForm extends StatelessWidget {
     return BlocListener<AuthBloc,AuthState>(
       listener: (BuildContext context, state) {
         if (state is Loaded) {
-          context.router.replaceNamed('/navigation');
+          context.router.replaceNamed('/');
         }
         if (state is ErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
