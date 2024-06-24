@@ -127,15 +127,11 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
         ..fields['description'] = scholarship.description
         ..fields['organizationName'] = scholarship.organizationName
         ..fields['fundingType'] = scholarship.fundingType
-        ..fields['startApplicationDate'] =
-        scholarship.startApplicationDate.toIso8601String()
-        ..fields['endApplicationDate'] =
-        scholarship.endApplicationDate.toIso8601String()
+        ..fields['startApplicationDate'] = scholarship.startApplicationDate.toIso8601String()
+        ..fields['endApplicationDate'] = scholarship.endApplicationDate.toIso8601String()
         ..fields['applicationStartPeriod'] = scholarship.applicationStartPeriod
-        ..fields['hostCountriesIds'] =
-        json.encode(scholarship.hostCountriesIds.map((id) => id.toString()).toList())
-        ..fields['studyLevelsIds'] =
-        json.encode(scholarship.studyLevelsIds.map((id) => id.toString()).toList())
+        ..fields['hostCountriesIds'] = json.encode(scholarship.hostCountriesIds)
+        ..fields['studyLevelsIds'] = json.encode(scholarship.studyLevelsIds)
         ..files.add(await http.MultipartFile.fromPath(
           'coverPhoto',
           scholarship.coverPhoto.path,

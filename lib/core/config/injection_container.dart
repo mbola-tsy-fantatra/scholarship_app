@@ -6,6 +6,7 @@ import 'package:scholariship/core/routes/auth_guard.dart';
 import 'package:scholariship/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scholariship/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:scholariship/features/auth/domain/repository/auth_repository.dart';
+import 'package:scholariship/features/auth/domain/usecases/logout.dart';
 import 'package:scholariship/features/auth/presentation/index.dart';
 import 'package:scholariship/features/profile/data/datasources/user_remote_data_source.dart';
 import 'package:scholariship/features/profile/data/repository/profile_repository_impl.dart';
@@ -41,6 +42,7 @@ Future<void> init()async {
 
   // UseCases
   sl.registerLazySingleton(()=>AuthGuard(sl()));
+  sl.registerLazySingleton(()=>Logout(sharedPreferences: sl()));
 
 
   // Repository

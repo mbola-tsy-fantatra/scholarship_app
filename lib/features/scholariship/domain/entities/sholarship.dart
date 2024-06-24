@@ -10,7 +10,7 @@ class Scholarship extends Equatable{
   final String officialLink;
   final String organizationName;
   final String coverPhoto;
-  final DateTime applicationStartPeriod;
+  final String applicationStartPeriod;
   final String fundingType;
 
   const Scholarship({required this.fundingType,required this.applicationStartPeriod,required this.description,required this.id, required this.name, required this.applicationStartDate, required this.applicationEndDate, required this.officialLink, required this.organizationName, required this.coverPhoto});
