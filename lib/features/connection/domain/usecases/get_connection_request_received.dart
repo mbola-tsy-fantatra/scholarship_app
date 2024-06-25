@@ -1,24 +1,30 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:scholariship/core/usecases/usecase.dart';
+import 'package:scholariship/features/connection/domain/entities/connection_received.dart';
+import 'package:scholariship/features/connection/domain/repository/connection_repository.dart';
 import 'package:scholariship/global/error/failure.dart';
 
 import '../entities/connection.dart';
 
-class GetConnectionRequestReceived extends UseCase<Connection,Params>{
-  @override
-  Future<Either<Failure, Connection?>?> call(Params params) {
+class GetConnectionRequestReceived extends UseCase<List<ConnectionReceived>,GetRequestParams>{
 
-    throw UnimplementedError();
+  final ConnectionRepository connectionRepository;
+
+  GetConnectionRequestReceived({required this.connectionRepository});
+
+  @override
+  Future<Either<Failure, List<ConnectionReceived>>> call(GetRequestParams params) async{
+    return await connectionRepository.getConnectionRequestReceiver(params.limit, params.page);
   }
 
 }
 
-class Params extends Equatable{
+class GetRequestParams extends Equatable{
   final int limit;
   final int page;
 
-  const  Params({required this.limit, required this.page});
+  const  GetRequestParams({required this.limit, required this.page});
 
   @override
   List<Object?> get props => [limit,page];
