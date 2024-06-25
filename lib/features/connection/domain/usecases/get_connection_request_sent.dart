@@ -5,20 +5,20 @@ import 'package:scholariship/global/error/failure.dart';
 
 import '../entities/connection.dart';
 
-class GetConnectionRequestSent extends UseCase<Connection,Params>{
+class GetConnectionRequestSent extends UseCase<Connection,GetConnectionParams>{
   @override
-  Future<Either<Failure, Connection?>?> call(Params params) {
+  Future<Either<Failure, Connection>> call(GetConnectionParams params) {
 
     throw UnimplementedError();
   }
 
 }
 
-class Params extends Equatable{
+class GetConnectionParams extends Equatable{
   final int limit;
   final int page;
 
-  const  Params({required this.limit, required this.page});
+  const  GetConnectionParams({required this.limit, required this.page});
 
   @override
   List<Object?> get props => [limit,page];

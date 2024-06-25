@@ -29,6 +29,7 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
   @override
   Future<List<ScholarshipModel>> findScholarship(String location, String studyLevel, String studyField) async {
     final String? token = sharedPreferences.getString('access_token');
+    print(token);
     Map<String, String> queryParams = {};
     if (location.isNotEmpty) {
       queryParams['hostCountry'] = location;
@@ -126,8 +127,8 @@ class ScholarshipRemoteDataSourceImpl implements ScholarshipRemoteDataSource{
         ..fields['description'] = scholarship.description
         ..fields['organizationName'] = scholarship.organizationName
         ..fields['fundingType'] = scholarship.fundingType
-        ..fields['startApplicationDate'] = scholarship.startApplicationDate.toIso8601String()
-        ..fields['endApplicationDate'] = scholarship.endApplicationDate.toIso8601String()
+        ..fields['startApplicationDate'] = scholarship.startApplicationDate.toString()
+        ..fields['endApplicationDate'] = scholarship.endApplicationDate.toString()
         ..fields['applicationStartPeriod'] = scholarship.applicationStartPeriod
         ..files.add(await http.MultipartFile.fromPath(
           'coverPhoto',
