@@ -5,7 +5,6 @@ import 'package:scholariship/features/connection/domain/entities/connection_rece
 import 'package:scholariship/features/connection/domain/repository/connection_repository.dart';
 import 'package:scholariship/global/error/failure.dart';
 
-import '../entities/connection.dart';
 
 class GetConnectionRequestReceived extends UseCase<List<ConnectionReceived>,GetRequestParams>{
 

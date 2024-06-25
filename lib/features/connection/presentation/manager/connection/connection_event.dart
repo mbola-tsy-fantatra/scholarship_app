@@ -18,20 +18,11 @@ class CreateConnectionLoaded extends ConnectionEvent{
   List<Object?> get props => [];
 }
 
-class GetConnectionRequestSent extends ConnectionEvent{
+class GetConnections extends ConnectionEvent{
   final int limit;
   final int page;
 
-  const GetConnectionRequestSent({required this.page,required this.limit});
-
-  @override
-  List<Object?> get props => [limit,page];
-}
-class GetConnectionRequestReceived extends ConnectionEvent{
-  final int limit;
-  final int page;
-
-  const GetConnectionRequestReceived({required this.page,required this.limit});
+  const GetConnections({required this.limit,required this.page});
 
   @override
   List<Object?> get props => [limit,page];

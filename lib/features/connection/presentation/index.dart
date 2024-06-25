@@ -2,4 +2,4 @@
 
 
 //manager
-export 'manager/connection_bloc.dart';
+export 'manager/connection/connection_bloc.dart';

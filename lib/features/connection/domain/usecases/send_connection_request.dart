@@ -13,9 +13,8 @@ class SendConnectionRequest extends UseCase<ConnectionSender,Params>{
   SendConnectionRequest({required this.connectionRepository});
 
   @override
-  Future<Either<Failure, ConnectionSender?>?> call(Params params) {
-
-    throw UnimplementedError();
+  Future<Either<Failure, ConnectionSender?>?> call(Params params) async{
+    return connectionRepository.sendConnectionRequest(params.connectionRequest);
   }
 
 }
