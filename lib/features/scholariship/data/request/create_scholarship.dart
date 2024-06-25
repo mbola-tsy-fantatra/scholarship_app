@@ -8,8 +8,8 @@ class CreateScholarship extends Equatable {
   final File coverPhoto;
   final String organizationName;
   final String fundingType;
-  final DateTime startApplicationDate;
-  final DateTime endApplicationDate;
+  final DateTime? startApplicationDate;
+  final DateTime? endApplicationDate;
   final String applicationStartPeriod;
   final List<int> hostCountriesIds;
   final List<int> studyLevelsIds;
@@ -66,8 +66,8 @@ class CreateScholarship extends Equatable {
       'description': description,
       'organizationName': organizationName,
       'fundingType': fundingType.toString(),
-      'startApplicationDate': startApplicationDate.toIso8601String(),
-      'endApplicationDate': endApplicationDate.toIso8601String(),
+      'startApplicationDate': startApplicationDate?.toIso8601String(),
+      'endApplicationDate': endApplicationDate?.toIso8601String(),
       'applicationStartPeriod': applicationStartPeriod,
       'hostCountriesIds': hostCountriesIds.map((id) => id.toString()).toList(),
       'studyLevelsIds': studyLevelsIds.map((id) => id.toString()).toList(),

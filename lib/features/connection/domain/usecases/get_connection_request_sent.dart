@@ -4,12 +4,17 @@ import 'package:scholariship/core/usecases/usecase.dart';
 import 'package:scholariship/global/error/failure.dart';
 
 import '../entities/connection.dart';
+import '../repository/connection_repository.dart';
 
 class GetConnectionRequestSent extends UseCase<Connection,GetConnectionParams>{
-  @override
-  Future<Either<Failure, Connection>> call(GetConnectionParams params) {
 
-    throw UnimplementedError();
+  final ConnectionRepository connectionRepository;
+
+  GetConnectionRequestSent({required this.connectionRepository});
+
+  @override
+  Future<Either<Failure, Connection>> call(GetConnectionParams params) async{
+    return await connectionRepository.getConnectionRequest(params.limit, params.page);
   }
 
 }

@@ -8,6 +8,14 @@ import 'package:scholariship/features/auth/data/repository/auth_repository_impl.
 import 'package:scholariship/features/auth/domain/repository/auth_repository.dart';
 import 'package:scholariship/features/auth/domain/usecases/logout.dart';
 import 'package:scholariship/features/auth/presentation/index.dart';
+import 'package:scholariship/features/connection/data/datasources/connection_remote_data_sources.dart';
+import 'package:scholariship/features/connection/data/repository/connection_repository_impl.dart';
+import 'package:scholariship/features/connection/domain/repository/connection_repository.dart';
+import 'package:scholariship/features/connection/domain/usecases/get_connection_request_received.dart';
+import 'package:scholariship/features/connection/domain/usecases/get_connection_request_sent.dart';
+import 'package:scholariship/features/connection/presentation/index.dart';
+import 'package:scholariship/features/connection/presentation/manager/connection_request/connection_request_bloc.dart';
+import 'package:scholariship/features/connection/presentation/manager/connection_sent/connection_sent_bloc.dart';
 import 'package:scholariship/features/profile/data/datasources/user_remote_data_source.dart';
 import 'package:scholariship/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:scholariship/features/profile/domain/repository/profile_repository.dart';
@@ -28,6 +36,9 @@ import 'package:scholariship/features/scholariship/presentation/manager/academic
 import 'package:scholariship/features/scholariship/presentation/manager/country/country_bloc.dart';
 import 'package:scholariship/features/scholariship/presentation/manager/studylevel/study_level_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../features/connection/domain/usecases/get_connection_request.dart';
+import '../../features/connection/domain/usecases/send_connection_request.dart';
 
 final sl = GetIt.instance;
 
@@ -99,6 +110,23 @@ Future<void> init()async {
   sl.registerLazySingleton<ScholarshipRemoteDataSource>(()=>ScholarshipRemoteDataSourceImpl(sharedPreferences: sl(), client: sl()));
 
 
+  //! Feature - Connection
+  // Bloc
+  sl.registerFactory(()=>ConnectionBloc(getConnectionRequest: sl()));
+  sl.registerFactory(()=>ConnectionRequestBloc(getConnectionRequestReceived: sl()));
+  sl.registerFactory(()=>ConnectionSentBloc(getConnectionRequestSent: sl()));
+
+  //UseCases
+  sl.registerLazySingleton(()=>SendConnectionRequest(connectionRepository: sl()));
+  sl.registerLazySingleton(()=>GetConnectionRequestReceived(connectionRepository: sl()));
+  sl.registerLazySingleton(()=>GetConnectionRequestSent(connectionRepository: sl()));
+  sl.registerLazySingleton(()=>GetConnectionRequest(connectionRepository: sl()));
+
+  //Repository
+  sl.registerLazySingleton<ConnectionRepository>(()=>ConnectionRepositoryImpl(remoteDataSources: sl()));
+
+  //DataSources
+  sl.registerLazySingleton<ConnectionRemoteDataSources>(()=>ConnectionRemoteDataSourceImpl(sharedPreferences: sl(), client: sl()));
 
   //External
   final sharedPreferences = await SharedPreferences.getInstance();
