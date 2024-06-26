@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholariship/features/connection/presentation/index.dart';
+
+import '../../../../core/config/injection_container.dart';
 
 @RoutePage()
 class ConnectionScreen extends StatelessWidget {
@@ -8,104 +12,24 @@ class ConnectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          const SliverAppBar(
-            pinned: true,
-            title: Text('Connections'),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                CircleAvatar(
-                  backgroundColor: Colors.amber,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.red,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),CircleAvatar(
-                backgroundColor: Colors.black45,
-                child: const Text('AH'),
-              ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),
-
-              ],
+      body: BlocProvider(
+        create: (context)=> sl<ConnectionBloc>(),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            const SliverAppBar(
+              pinned: true,
+              title: Text('Connections'),
             ),
-          ),
-        ],
-      ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+
+                ],
+              ),
+            ),
+          ],
+        ),
+      )
     );
   }
 }
