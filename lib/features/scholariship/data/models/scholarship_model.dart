@@ -7,7 +7,7 @@ class ScholarshipModel extends Scholarship{
     required super.name,  required super.applicationStartDate,
     required super.applicationEndDate, required super.officialLink, required super.organizationName,
     required super.coverPhoto, required super.fundingType, required super.applicationStartPeriod,
-    required super.description});
+    required super.description,super.savedBy});
 
 
   factory ScholarshipModel.fromJson(Map<String,dynamic> json){
@@ -50,6 +50,7 @@ class ScholarshipModel extends Scholarship{
       organizationName: json['organizationName'] ?? "",
       coverPhoto: json['coverPhoto'] ?? "",
       fundingType: json['fundingType'] ?? "",
+      savedBy: json['savedBy'] ?? [],
       applicationStartPeriod: json['applicationStartPeriod'] ?? "",
       description: json['description'] ?? "",
     );
@@ -66,7 +67,8 @@ class ScholarshipModel extends Scholarship{
       'name':name,
       'officialLink':officialLink,
       'applicationStart':applicationStartDate,
-      'organizationName':organizationName
+      'organizationName':organizationName,
+      'savedBy':savedBy
     };
   }
 }

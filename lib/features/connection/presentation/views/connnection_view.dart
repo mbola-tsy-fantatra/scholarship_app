@@ -12,7 +12,7 @@ class ConnectionScreen extends StatelessWidget {
         slivers: <Widget>[
           const SliverAppBar(
             pinned: true,
-            title: Text('Connection Screen scrolleo aneh ee'),
+            title: Text('Connections'),
           ),
           SliverList(
             delegate: SliverChildListDelegate(

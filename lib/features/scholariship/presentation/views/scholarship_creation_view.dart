@@ -38,7 +38,7 @@ MultiBlocProvider buildBody(BuildContext context){
         BlocProvider(create: (context)=> sl<CountryBloc>(),),
         BlocProvider(create: (context)=> sl<StudyLevelBloc>(),),
       ],
-      child: CreateScholarshipForm(),
+      child: const CreateScholarshipForm(),
     );
 }
 }

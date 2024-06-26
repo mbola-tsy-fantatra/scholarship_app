@@ -21,16 +21,14 @@ class NavigationScreen extends StatelessWidget {
               title: const Text('Scholarship'),
               centerTitle: false,
               actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
-                  },
+                const CircleAvatar(
+                  backgroundImage: AssetImage("assets/honami.jpg"),
+
                 ),
                 IconButton(
                   icon: const Icon(Icons.settings),
                   onPressed: () {
-                      context.router.push(SettingRoute());
-
+                      context.router.push(const SettingRoute());
                   },
                 ),
               ],
