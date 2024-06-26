@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../../global/widgets/custom_button.dart';
 import '../../data/request/create_scholarship.dart';
 import '../manager/country/country_bloc.dart';
@@ -9,7 +10,6 @@ import '../manager/scholarship/scholarship_bloc.dart';
 import '../manager/studylevel/study_level_bloc.dart';
 
 class CreateScholarshipForm extends StatefulWidget {
-
   const CreateScholarshipForm({super.key});
 
   @override
@@ -31,6 +31,7 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
   List<int> studyLevelsIds = [];
 
   void createScholarship() {
+
     final scholarship = CreateScholarship(
       name: name,
       officialLink: officialLink,
@@ -44,8 +45,10 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
       hostCountriesIds: hostCountriesIds,
       studyLevelsIds: studyLevelsIds,
     );
+    print(scholarship);
     BlocProvider.of<ScholarshipBloc>(context).add(CreateScholarshipEvent(createScholarship: scholarship));
   }
+
   @override
   void initState() {
     super.initState();
@@ -110,9 +113,8 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                   name = value!;
                 },
                 decoration: const InputDecoration(
-                  hintText: "Nom",
-                  prefixIcon: const Icon(Icons.text_fields),
-                  border: OutlineInputBorder(),
+                  hintText: "Name",
+                  prefixIcon: Icon(Icons.text_fields),
                 ),
               ),
               const SizedBox(height: 12.0),
@@ -123,17 +125,16 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                 onSaved: (value) {
                   officialLink = value!;
                 },
-                decoration:  InputDecoration(
-                  hintText: "Lien officiel",
+                decoration: const InputDecoration(
+                  hintText: "Tape the official link here",
                   prefixIcon: Icon(Icons.link),
-                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 12.0),
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Ce champ est obligatoire. Veuillez le completer.';
+                    return 'This input is required.';
                   }
                   return null;
                 },
@@ -143,18 +144,40 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                 },
                 decoration: const InputDecoration(
                   hintText: "Description",
-                  prefixIcon: const Icon(Icons.description),
-                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.description),
+                ),
+              ),
+              const SizedBox(height: 30.0),
+              InkWell(
+                onTap: pickCoverPhoto,
+                child: Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.image,
+                        size: 50,
+                        color: Colors.grey[600],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Choose a cover photo',
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 12.0),
-              ElevatedButton(
-                onPressed: pickCoverPhoto,
-                child: const Text('Choisir une photo de couverture'),
-              ),
-              const SizedBox(height: 12.0),
               coverPhoto == null
-                  ? const Text('Aucune photo sélectionnée.')
+                  ? const Text('No photos selected')
                   : Image.file(coverPhoto!, height: 100, width: 100),
               const SizedBox(height: 12.0),
               TextFormField(
@@ -165,81 +188,117 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                   organizationName = value!;
                 },
                 decoration: const InputDecoration(
-                  hintText: "Nom de l'organisation",
+                  hintText: "Organization Name",
                   prefixIcon: Icon(Icons.business),
-                  border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 12.0),
-              TextFormField(
-                validator: (value) {
-                  return null;
+              const SizedBox(height: 30.0),
+              DropdownButtonFormField<String>(
+                value: applicationStartPeriod.isNotEmpty ? applicationStartPeriod : null,
+                items: const [
+                  DropdownMenuItem(
+                    value: 'every year',
+                    child: Text('Every year'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'every two year',
+                    child: Text('Every two year'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    applicationStartPeriod = value!;
+                  });
                 },
-                onSaved: (value) {
-                  fundingType = value!;
-                },
-                decoration: const InputDecoration(
-                  hintText: "Type de financement",
-                  prefixIcon: Icon(Icons.monetization_on),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 12.0),
-              ElevatedButton(
-                onPressed: () => selectDate(context, true),
-                child: const Text('Sélectionner la date de début'),
-              ),
-              Text('Date de début: ${startApplicationDate.toLocal()}'.split(' ')[0]),
-              const SizedBox(height: 12.0),
-              ElevatedButton(
-                onPressed: () => selectDate(context, false),
-                child: const Text('Sélectionner la date de fin'),
-              ),
-              Text('Date de fin: ${endApplicationDate.toLocal()}'.split(' ')[0]),
-              const SizedBox(height: 12.0),
-              TextFormField(
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Ce champ est obligatoire. Veuillez le completer.';
+                  if (value == null || value.isEmpty) {
+                    return 'This input is required.';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  applicationStartPeriod = value!;
-                },
-                decoration: InputDecoration(
-                  hintText: "Période de début des candidatures",
-                  prefixIcon: const Icon(Icons.date_range),
-                  border: OutlineInputBorder(),
+                decoration: const InputDecoration(
+                  hintText: "Select funding type",
+                  prefixIcon: Icon(Icons.date_range),
                 ),
               ),
-              const SizedBox(height: 12.0),
+              const SizedBox(height: 30.0),
+              InkWell(
+                onTap: () => selectDate(context, true),
+                child: InputDecorator(
+                  decoration: const InputDecoration(
+                    labelText: "Start date",
+                    prefixIcon: Icon(Icons.calendar_today),
+                  ),
+                  child: Text(
+                    '${startApplicationDate.toLocal()}'.split(' ')[0],
+                    style: const TextStyle(color: Colors.black87, fontSize: 16),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30.0),
+              InkWell(
+                onTap: () => selectDate(context, false),
+                child: InputDecorator(
+                  decoration: const InputDecoration(
+                    labelText: "End date",
+                    prefixIcon: Icon(Icons.calendar_today),
+                  ),
+                  child: Text(
+                    '${endApplicationDate.toLocal()}'.split(' ')[0],
+                    style: const TextStyle(color: Colors.black87, fontSize: 16),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30.0),
+              DropdownButtonFormField<String>(
+                value: fundingType.isNotEmpty ? fundingType : null,
+                items: const [
+                  DropdownMenuItem(
+                    value: 'FULLY_FUNDED',
+                    child: Text('Fully funded'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'PARTIAL_FUNDED',
+                    child: Text('Partial funded'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    fundingType = value!;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This input is required.';
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  hintText: "Select funding type",
+                  prefixIcon: Icon(Icons.date_range),
+                ),
+              ),
+              const SizedBox(height: 30.0),
               // Host Countries
               BlocBuilder<CountryBloc, CountryState>(
                 builder: (context, state) {
                   if (state is CountryLoading) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (state is CountryLoaded) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text('Pays Hôtes', style: TextStyle(fontWeight: FontWeight.bold)),
-                        Column(
-                          children: state.country.map((country) {
-                            return CheckboxListTile(
-                              title: Text(country.name),
-                              value: hostCountriesIds.contains(country.countryId),
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  if (value == true) {
-                                    hostCountriesIds.add(country.countryId);
-                                  } else {
-                                    hostCountriesIds.remove(country.countryId);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
+                        MultiSelectDialogField(
+                          items: state.country.map((country) => MultiSelectItem(country.countryId, country.name)).toList(),
+                          initialValue: hostCountriesIds,
+                          title: const Text("Countries"),
+                          buttonText: const Text("Select Countries"),
+                          onConfirm: (values) {
+                            setState(() {
+                              hostCountriesIds = values.cast<int>();
+                            });
+                          },
                         ),
                       ],
                     );
@@ -260,23 +319,17 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Niveaux d\'étude', style: TextStyle(fontWeight: FontWeight.bold)),
-                        Column(
-                          children: state.studyLevel.map((level) {
-                            return CheckboxListTile(
-                              title: Text(level.name),
-                              value: studyLevelsIds.contains(level.id),
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  if (value == true) {
-                                    studyLevelsIds.add(level.id);
-                                  } else {
-                                    studyLevelsIds.remove(level.id);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
+                        const Text('Study Level', style: TextStyle(fontWeight: FontWeight.bold)),
+                        MultiSelectDialogField(
+                          items: state.studyLevel.map((level) => MultiSelectItem(level.id, level.name)).toList(),
+                          initialValue: studyLevelsIds,
+                          title: const Text("Study Levels"),
+                          buttonText: const Text("Select Study Levels"),
+                          onConfirm: (values) {
+                            setState(() {
+                              studyLevelsIds = values.cast<int>();
+                            });
+                          },
                         ),
                       ],
                     );
@@ -289,7 +342,7 @@ class _CreateScholarshipFormState extends State<CreateScholarshipForm> {
               ),
               const SizedBox(height: 12.0),
               CustomButton(
-                label: "Créer une bourse",
+                label: "Create scholarship",
                 onPressed: submitForm,
               ),
             ],
