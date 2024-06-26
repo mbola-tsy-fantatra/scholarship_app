@@ -40,7 +40,7 @@ class NavigationScreen extends StatelessWidget {
             HomeRoute(),
             ScholarshipRoute(),
             ConnectionRoute(),
-            MessageRoute(),
+            ConversationListRoute(),
             NotificationRoute(),
           ],
           transitionBuilder: (context, child, animation) => FadeTransition(

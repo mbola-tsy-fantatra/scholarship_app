@@ -29,7 +29,7 @@ class AppRouter extends $AppRouter {
           AutoRoute(page: HomeRoute.page),
           AutoRoute(page: ScholarshipRoute.page),
           AutoRoute(page: ConnectionRoute.page),
-          AutoRoute(page: MessageRoute.page),
+          AutoRoute(page: ConversationListRoute.page),
           AutoRoute(page: NotificationRoute.page),
         ]
     ),
