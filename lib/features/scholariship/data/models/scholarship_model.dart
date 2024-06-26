@@ -44,8 +44,12 @@ class ScholarshipModel extends Scholarship{
     return ScholarshipModel(
       id: json['id'] ?? "",
       name: json['name'] ?? "",
-      applicationStartDate: DateTime.parse(json['startApplicationDate'])  ,
-      applicationEndDate: DateTime.parse(json['endApplicationDate']) ,
+      applicationStartDate: json['startApplicationDate'] != null
+          ? DateTime.parse(json['startApplicationDate'])
+          : DateTime.now(),
+      applicationEndDate: json['endApplicationDate'] != null
+          ? DateTime.parse(json['endApplicationDate'])
+          : DateTime.now(),
       officialLink: json['officialLink'] ?? "",
       organizationName: json['organizationName'] ?? "",
       coverPhoto: json['coverPhoto'] ?? "",
