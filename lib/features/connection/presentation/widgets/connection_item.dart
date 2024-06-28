@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ConnectionItem extends StatelessWidget {
+import '../../domain/entities/connnection_item.dart';
+
+class ConnectionItemWidget extends StatelessWidget {
 
   final ConnectionItem connectionItem;
 
-  const ConnectionItem({super.key,required this.connectionItem});
+  const ConnectionItemWidget({super.key,required this.connectionItem});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: AssetImage("assets/honami.jpg"),
+        ),
+        Text("Yor Forger")
+      ],
+    );
   }
 }

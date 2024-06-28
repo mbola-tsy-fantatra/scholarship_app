@@ -41,6 +41,14 @@ class AppRouter extends $AppRouter {
     AutoRoute(
         path: '/setting',
         page:SettingRoute.page
-    )
+    ),
+    AutoRoute(
+        path: '/request',
+        page: RequestRoute.page
+    ),
+    AutoRoute(
+        path: '/request-sent',
+        page: RequestSentRoute.page
+    ),
   ];
 }
