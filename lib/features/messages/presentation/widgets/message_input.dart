@@ -29,11 +29,12 @@ class MessageInput extends StatelessWidget {
             icon: const  Icon(Icons.send),
             onPressed: () {
               final messageRepository = Provider.of<MessageRepositiory>(context, listen: false);
+              final participants = messageRepository.conversation.participants;
               messageRepository.sendMessage('chat:message:send', 
               {
                 'conversationId': messageRepository.conversation.id,
                 'content': messageController.text,
-                'receiverId': messageRepository.conversation.participants.participantB.id
+                'receiverId': messageRepository.useriD == participants.participantA.id ? participants.participantB.id : participants.participantA.id,
               }
               );
               scrollToBottom();
