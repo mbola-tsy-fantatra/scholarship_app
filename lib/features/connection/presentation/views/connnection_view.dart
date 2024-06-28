@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholariship/core/routes/router.gr.dart';
 import 'package:scholariship/features/connection/domain/entities/connnection_item.dart';
 import 'package:scholariship/features/connection/presentation/index.dart';
+import 'package:scholariship/features/connection/presentation/widgets/connection_item.dart';
 
 import '../../../../core/config/injection_container.dart';
 
@@ -69,7 +71,8 @@ class ConnectionScreen extends StatelessWidget {
                           )
                       ],
                     )
-              )
+              ),
+                const ConnectionItemWidget()
                 ],
               ),
             ),
