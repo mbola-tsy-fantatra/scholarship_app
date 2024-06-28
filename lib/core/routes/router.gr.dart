@@ -9,9 +9,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:flutter/material.dart' as _i15;
 import 'package:scholariship/core/routes/navigation_screen.dart' as _i6;
 import 'package:scholariship/features/auth/presentation/views/login_view.dart'
-    as _i4;
+    as _i5;
 import 'package:scholariship/features/auth/presentation/views/password_recovery_view.dart'
     as _i8;
 import 'package:scholariship/features/auth/presentation/views/register_view.dart'
@@ -19,11 +20,11 @@ import 'package:scholariship/features/auth/presentation/views/register_view.dart
 import 'package:scholariship/features/connection/presentation/views/connnection_view.dart'
     as _i1;
 import 'package:scholariship/features/home/presentation/views/home_view.dart'
-    as _i3;
+    as _i4;
 import 'package:scholariship/features/messages/presentation/views/conversation_list_view.dart'
     as _i2;
-import 'package:scholariship/features/messages/presentation/views/message_view.dart'
-    as _i5;
+import 'package:scholariship/features/messages/presentation/views/diiscussion_view.dart'
+    as _i3;
 import 'package:scholariship/features/notifications/presentation/views/notification_view.dart'
     as _i7;
 import 'package:scholariship/features/profile/presentation/views/profile_view.dart'
@@ -52,22 +53,29 @@ abstract class $AppRouter extends _i14.RootStackRouter {
         child: const _i2.ConversationListScreen(),
       );
     },
+    DiscussionRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<DiscussionRouteArgs>(
+          orElse: () => DiscussionRouteArgs(
+              conversationId: pathParams.getString('conversationId')));
+      return _i14.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i3.DiscussionScreen(
+          key: args.key,
+          conversationId: args.conversationId,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.HomeScreen(),
+        child: const _i4.HomeScreen(),
       );
     },
     LoginRoute.name: (routeData) {
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.LoginScreen(),
-      );
-    },
-    MessageRoute.name: (routeData) {
-      return _i14.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i5.MessageScreen(),
+        child: const _i5.LoginScreen(),
       );
     },
     NavigationRoute.name: (routeData) {
@@ -150,7 +158,46 @@ class ConversationListRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.HomeScreen]
+/// [_i3.DiscussionScreen]
+class DiscussionRoute extends _i14.PageRouteInfo<DiscussionRouteArgs> {
+  DiscussionRoute({
+    _i15.Key? key,
+    required String conversationId,
+    List<_i14.PageRouteInfo>? children,
+  }) : super(
+          DiscussionRoute.name,
+          args: DiscussionRouteArgs(
+            key: key,
+            conversationId: conversationId,
+          ),
+          rawPathParams: {'conversationId': conversationId},
+          initialChildren: children,
+        );
+
+  static const String name = 'DiscussionRoute';
+
+  static const _i14.PageInfo<DiscussionRouteArgs> page =
+      _i14.PageInfo<DiscussionRouteArgs>(name);
+}
+
+class DiscussionRouteArgs {
+  const DiscussionRouteArgs({
+    this.key,
+    required this.conversationId,
+  });
+
+  final _i15.Key? key;
+
+  final String conversationId;
+
+  @override
+  String toString() {
+    return 'DiscussionRouteArgs{key: $key, conversationId: $conversationId}';
+  }
+}
+
+/// generated route for
+/// [_i4.HomeScreen]
 class HomeRoute extends _i14.PageRouteInfo<void> {
   const HomeRoute({List<_i14.PageRouteInfo>? children})
       : super(
@@ -164,7 +211,7 @@ class HomeRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.LoginScreen]
+/// [_i5.LoginScreen]
 class LoginRoute extends _i14.PageRouteInfo<void> {
   const LoginRoute({List<_i14.PageRouteInfo>? children})
       : super(
@@ -173,20 +220,6 @@ class LoginRoute extends _i14.PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
-
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i5.MessageScreen]
-class MessageRoute extends _i14.PageRouteInfo<void> {
-  const MessageRoute({List<_i14.PageRouteInfo>? children})
-      : super(
-          MessageRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MessageRoute';
 
   static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
 }

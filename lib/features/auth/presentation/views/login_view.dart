@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholariship/features/auth/presentation/index.dart';
 import 'package:scholariship/features/auth/presentation/widgets/login_form.dart';
-import 'package:scholariship/features/auth/presentation/widgets/register_form.dart';
 
 import '../../../../core/config/injection_container.dart';
 
@@ -42,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                     Text(
                       'Login',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.w500
                       ),
                     ),

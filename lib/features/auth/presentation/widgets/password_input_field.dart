@@ -55,17 +55,17 @@ String? _validatePassword(String? value) {
     return 'Le mot de passe ne peut pas être vide';
   }
   // Vérifiez si le mot de passe contient au moins 8 caractères
-  if (value.length < 8) {
-    return 'Le mot de passe doit contenir au moins 8 caractères';
-  }
+  //if (value.length < 8) {
+    //return 'Le mot de passe doit contenir au moins 8 caractères';
+  //}
   // Vérifiez si le mot de passe contient au moins un chiffre
   if (!RegExp(r'[0-9]').hasMatch(value)) {
     return 'Le mot de passe doit contenir au moins un chiffre';
   }
   // Vérifiez si le mot de passe contient au moins un caractère spécial
-  if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
-    return 'Le mot de passe doit contenir au moins un caractère spécial';
-  }
+  //if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+    //return 'Le mot de passe doit contenir au moins un caractère spécial';
+  //}
   // Le mot de passe est valide
   return null;
 }

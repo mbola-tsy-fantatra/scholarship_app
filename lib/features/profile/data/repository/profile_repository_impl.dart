@@ -16,7 +16,7 @@ class ProfileRepositoryImpl implements ProfileRepository{
   Future<Either<Failure, User>>? getUserProfileInfo(String userId) async{
     try{
         final response = await remoteDataSource.getUserProfileInfo(userId);
-        return Right(response!);
+        return Right(response);
     }on ServerException{
       return Left(ServerFailure());
     }

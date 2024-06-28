@@ -8,14 +8,14 @@ class Conversation extends Equatable {
   final String id;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final Message lastMessages;
+  final List<Message?> messages;
   final Participant participants;
 
   const Conversation({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
-    required this.lastMessages,
+    required this.messages,
     required this.participants,
   });
  
@@ -24,7 +24,9 @@ factory Conversation.fromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     createdAt: DateTime.parse(json['createdAt'] as String),
     updatedAt: DateTime.parse(json['updatedAt'] as String),
-    lastMessages: Message.fromJson(json['messages'] as Map<String, dynamic>),
+    messages: (json['messages'] as List)
+          .map((e) => e == null ? null : Message.fromJson(e as Map<String, dynamic>))
+          .toList(),
     participants: Participant.fromJson(json['participants'] as Map<String, dynamic>),
   );
 }
@@ -33,7 +35,7 @@ factory Conversation.fromJson(Map<String, dynamic> json) {
       'id': id,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
-      'messages': lastMessages,
+      'messages':  messages,
       'participants': participants,
     };
   }
@@ -42,7 +44,7 @@ factory Conversation.fromJson(Map<String, dynamic> json) {
         id,
         createdAt,
         updatedAt,
-        lastMessages,
+        messages,
       ];
 }
 

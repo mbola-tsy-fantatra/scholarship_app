@@ -1,37 +1,30 @@
-  import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketManager {
-  SharedPreferences? sharedPreferences;
-  static final SocketManager _instance = SocketManager._internal();
-
+  final SharedPreferences sharedPreferences;
   IO.Socket? _socket;
 
-  
-
-  factory SocketManager(SharedPreferences sharedPreferences) {
-     _instance.sharedPreferences = sharedPreferences;
-     return _instance;
-  }
-  SocketManager._internal();
+  SocketManager({required this.sharedPreferences});
 
   // Connect to the Socket.IO server
   Future<void> connect(String url) async {
     try {
-      final token = sharedPreferences!.getString('authToken'); 
-       _socket = IO.io(url, IO.OptionBuilder()
-           .setTransports(['websocket'])
-           .disableAutoConnect()
-           .setExtraHeaders( {
-             'Authorization': 'Bearer ${token!}'
-           })
-           .build()
-       );
-      _socket!.connect();
-
+      final token = sharedPreferences.getString('access_token');
+      print(token);
+      _socket = IO.io(url, IO.OptionBuilder()
+          .setTransports(['websocket'])
+          .setExtraHeaders({
+            'Authorization': 'Bearer $token'
+          })
+          .build()
+      );
+      print('Connecting to Socket.IO server');
+       print(_socket!.connected);
       _socket!.onConnect((_) {
         print('Connected to Socket.IO server');
       });
+      print(_socket!.connected);
 
       _socket!.onDisconnect((_) => print('Disconnected from Socket.IO server'));
     } catch (e) {
@@ -42,6 +35,7 @@ class SocketManager {
   // Send a message
   void sendMessage(String event, dynamic data) {
     if (_socket != null) {
+      print('Sending message: $event with data: $data');
       _socket!.emit(event, data);
     }
   }
@@ -49,16 +43,17 @@ class SocketManager {
   // Listen for an event
   void onEvent(String event, Function(dynamic data) callback) {
     if (_socket != null) {
-      _socket!.on(event, callback);
+      print('Listening for event: $event');
+      _socket!.on(event, (data) {
+        print('Received event: $event with data: $data');
+        callback(data);
+      });
     }
   }
 
   // Close the connection
   void disconnect() {
-    if (_socket != null) {
-      _socket!.disconnect();
-      _socket = null;
-    }
+    _socket?.dispose();
+    _socket = null;
   }
 }
-

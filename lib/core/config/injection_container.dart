@@ -1,8 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:scholariship/core/routes/auth_guard.dart';
+import 'package:scholariship/core/services/websocket_manager.dart';
 import 'package:scholariship/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scholariship/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:scholariship/features/auth/domain/repository/auth_repository.dart';
@@ -16,6 +18,8 @@ import 'package:scholariship/features/connection/domain/usecases/get_connection_
 import 'package:scholariship/features/connection/presentation/index.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_request/connection_request_bloc.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_sent/connection_sent_bloc.dart';
+import 'package:scholariship/features/messages/repositories/conversation_repository.dart';
+import 'package:scholariship/features/messages/repositories/message_repositiory.dart';
 import 'package:scholariship/features/profile/data/datasources/user_remote_data_source.dart';
 import 'package:scholariship/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:scholariship/features/profile/domain/repository/profile_repository.dart';
@@ -43,8 +47,12 @@ import '../../features/connection/domain/usecases/send_connection_request.dart';
 final sl = GetIt.instance;
 
 Future<void> init()async {
+  //feature Messaging
+  sl.registerLazySingleton<SocketManager>(() => SocketManager(sharedPreferences: sl()));
+  sl.registerLazySingleton<ConversationRepository>(() => ConversationRepository(socketManager: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton<MessageRepositiory>(() => MessageRepositiory(socketManager: sl(), sharedPreferences: sl()));
 
-
+  //)
   //! Feature - Auth
   // Bloc
   sl.registerFactory(

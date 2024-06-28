@@ -22,12 +22,14 @@ class ScholarshipScreen extends StatelessWidget {
         BlocProvider(create: (context) => sl<StudyLevelBloc>()),
         BlocProvider(create: (context) => sl<ScholarshipBloc>()),
       ],
-      child: ScholarshipSearchPage(),
+      child: const ScholarshipSearchPage(),
     );
   }
 }
 
 class ScholarshipSearchPage extends StatefulWidget {
+  const ScholarshipSearchPage({super.key});
+
   @override
   _ScholarshipSearchPageState createState() => _ScholarshipSearchPageState();
 }

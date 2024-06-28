@@ -19,6 +19,7 @@ class AuthRepositoryImpl implements AuthRepository{
       final authResponse =  await remoteDataSource.login(email, password);
       sharedPreferences.setString('access_token', authResponse.access_token);
       sharedPreferences.setString('refresh_token', authResponse.refresh_token);
+      sharedPreferences.setString('user_id', authResponse.userId);
       return Right(authResponse);
     }on ServerFailure{
       return Left(ServerFailure());

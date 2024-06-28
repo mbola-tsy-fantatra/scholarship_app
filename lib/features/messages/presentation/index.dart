@@ -1,5 +1,5 @@
 //view
-export 'views/message_view.dart';
+export 'views/diiscussion_view.dart';
 export 'views/conversation_list_view.dart';
 
 //manager

@@ -17,88 +17,88 @@ class ConnectionScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.amber,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.red,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
-                ),CircleAvatar(
+                  child: Text('AH'),
+                ),const CircleAvatar(
                 backgroundColor: Colors.black45,
-                child: const Text('AH'),
+                child: Text('AH'),
               ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.black45,
-                  child: const Text('AH'),
+                  child: Text('AH'),
                 ),
 
               ],
