@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:scholariship/features/connection/presentation/widgets/request_received_item.dart';
 
 @RoutePage()
 class RequestScreen extends StatelessWidget {
@@ -17,6 +18,14 @@ class RequestScreen extends StatelessWidget {
         ),
         title: const Text('Request'),
       ),
+      body: const Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            RequestReceivedItem()
+          ],
+        ),
+      )
     );
   }
 }

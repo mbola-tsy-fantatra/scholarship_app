@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:scholariship/features/connection/presentation/widgets/request_sent_item.dart';
 
 
 @RoutePage()
@@ -18,6 +19,11 @@ class RequestSentScreen extends StatelessWidget {
         ),
         title: const Text('Request sent'),
       ),
-    );;
+      body: const Column(
+        children: [
+          RequestSentItem()
+        ],
+      ),
+    );
   }
 }
