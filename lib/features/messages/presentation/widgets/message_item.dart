@@ -19,10 +19,12 @@ class MessageItem extends StatelessWidget {
             alignment: message.senderId == userId ? Alignment.centerRight : Alignment.centerLeft,
             child: IntrinsicWidth(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (message.senderId != userId)
                     CircleAvatar(
-                      backgroundImage: NetworkImage('https://ui-avatars.com/api/?name=${message.sender.username}&size=0.2'),
+                      backgroundImage: NetworkImage('https://ui-avatars.com/api/?name=${message.sender.username}'),
                     ),
                   Container(
                     constraints: BoxConstraints(

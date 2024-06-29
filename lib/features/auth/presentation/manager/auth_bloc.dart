@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final response = await authRepository.login(email: event.email, password: event.password);
       response.fold((failure){
         emit(ErrorState(message:mapFailureToMessage(failure) ));
-      }, (authResponse){
+      }, (authResponse) async {
         emit(Loaded());
       });
   }

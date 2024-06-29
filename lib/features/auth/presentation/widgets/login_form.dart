@@ -5,7 +5,6 @@ import 'package:scholariship/features/auth/presentation/index.dart';
 import 'package:scholariship/features/auth/presentation/widgets/password_input_field.dart';
 import '../../../../global/utils/input_validate.dart';
 import '../../../../global/widgets/custom_button.dart';
-
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
@@ -17,7 +16,7 @@ class LoginForm extends StatelessWidget {
     void login(String email,String password)async{
       BlocProvider.of<AuthBloc>(context).add(Login(email: email, password: password));
     }
-    void submitForm() {
+    Future<void> submitForm() async {
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save(); // Save the form data
         login(email, password);

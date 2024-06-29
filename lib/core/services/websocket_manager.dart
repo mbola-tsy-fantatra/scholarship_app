@@ -1,24 +1,27 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketManager {
   final SharedPreferences sharedPreferences;
   IO.Socket? _socket;
-
+  String? _accessToken;
   SocketManager({required this.sharedPreferences});
 
   // Connect to the Socket.IO server
-  Future<void> connect(String url) async {
+  Future<void> connect(String url, String? accessToken) async {
+    _accessToken = accessToken;
     try {
-      final token = sharedPreferences.getString('access_token');
-      print(token);
+      _accessToken ??= sharedPreferences.getString('access_token');
       _socket = IO.io(url, IO.OptionBuilder()
           .setTransports(['websocket'])
+          .disableAutoConnect()
           .setExtraHeaders({
-            'Authorization': 'Bearer $token'
+            'Authorization': 'Bearer $_accessToken'
           })
           .build()
       );
+      _socket!.connect();
       print('Connecting to Socket.IO server');
        print(_socket!.connected);
       _socket!.onConnect((_) {
@@ -49,6 +52,15 @@ class SocketManager {
         callback(data);
       });
     }
+  }
+
+  Future<void> updateAccessToken(String newAccessToken) async {
+    _accessToken = newAccessToken;
+
+    if (_socket != null) {
+      disconnect();
+    }
+    await connect('${dotenv.env['SOCKET_URL']}', _accessToken!);
   }
 
   // Close the connection

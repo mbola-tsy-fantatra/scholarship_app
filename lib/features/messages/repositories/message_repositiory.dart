@@ -9,6 +9,9 @@ class MessageRepositiory{
   final SocketManager socketManager;
   final SharedPreferences sharedPreferences;
   final StreamController<Conversation?> _conversationStreamController = StreamController<Conversation>.broadcast();
+  final StreamController<String> _typingController = StreamController<String>.broadcast();
+  Stream<String> get typingStream => _typingController.stream;
+  
   Conversation? _conversation;
   String get userId => sharedPreferences.getString('user_id')!;
   MessageRepositiory({ required this.socketManager, required this.sharedPreferences}){
@@ -23,7 +26,6 @@ class MessageRepositiory{
     });
   }
   Conversation get conversation => _conversation!;
-
   void handleChatConversationMessagesEvent(Map<String, dynamic> data){
         try {
           print('Data received from socket: $data');

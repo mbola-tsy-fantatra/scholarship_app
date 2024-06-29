@@ -77,6 +77,7 @@ class _DiscussionContainerState extends State<DiscussionContainer> {
           final friendInfo = snapshot.data!.participants.participantA.id == userId ? snapshot.data!.participants.participantB : snapshot.data!.participants.participantA;
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.primary,
               title: DiscussionHeader(friendInfo: friendInfo),
             ),
             body: Padding(

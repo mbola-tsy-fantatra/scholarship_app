@@ -30,11 +30,16 @@ class MessageInput extends StatelessWidget {
             onPressed: () {
               final messageRepository = Provider.of<MessageRepositiory>(context, listen: false);
               final participants = messageRepository.conversation.participants;
+              print(messageRepository.userId);
+              print('A:${participants.participantA.id}');
+              print('B:${participants.participantB.id}');
+              final String receiverId = messageRepository.userId == participants.participantA.id ? participants.participantB.id : participants.participantA.id;
+              print('receuverId: $receiverId');
               messageRepository.sendMessage('chat:message:send', 
               {
                 'conversationId': messageRepository.conversation.id,
                 'content': messageController.text,
-                'receiverId': messageRepository.userId == participants.participantA.id ? participants.participantB.id : participants.participantA.id,
+                'receiverId': receiverId
               }
               );
               scrollToBottom();

@@ -6,7 +6,6 @@ import 'package:scholariship/features/auth/domain/usecases/logout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/config/injection_container.dart';
 import 'package:scholariship/global/error/failure.dart';
-
 import '../../../../core/routes/router.gr.dart';
 
 @RoutePage()
@@ -16,7 +15,7 @@ class SettingScreen extends StatelessWidget {
   Future<void> _logout(BuildContext context) async {
     final Logout logout = Logout(sharedPreferences: sl<SharedPreferences>());
     final Either<Failure, bool>? result = await logout(NoParams());
-
+    
     result?.fold(
           (failure) {
         ScaffoldMessenger.of(context).showSnackBar(

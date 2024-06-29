@@ -8,7 +8,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await  di.init();
-  await di.sl<SocketManager>().connect('${dotenv.env['SOCKET_URL']}');
+  await di.sl<SocketManager>().connect('${dotenv.env['SOCKET_URL']}', null);
   runApp(MyApp());
 }
 

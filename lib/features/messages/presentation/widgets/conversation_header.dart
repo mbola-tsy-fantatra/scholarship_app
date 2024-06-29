@@ -16,7 +16,10 @@ class DiscussionHeader extends StatelessWidget {
           backgroundImage: NetworkImage('https://ui-avatars.com/api/?name=${friendInfo.username}'),
         ),
         const SizedBox(width: 8.0),
-        Text(friendInfo.username, style: Theme.of(context).textTheme.titleMedium),
+        Text(friendInfo.username, style: Theme.of(context).textTheme.titleMedium!.copyWith(
+          color: Theme.of(context).colorScheme.onPrimary,
+        )
+        ),
       ],
     );
   }
