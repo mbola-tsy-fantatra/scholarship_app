@@ -34,7 +34,7 @@ class MessageInput extends StatelessWidget {
               {
                 'conversationId': messageRepository.conversation.id,
                 'content': messageController.text,
-                'receiverId': messageRepository.useriD == participants.participantA.id ? participants.participantB.id : participants.participantA.id,
+                'receiverId': messageRepository.userId == participants.participantA.id ? participants.participantB.id : participants.participantA.id,
               }
               );
               scrollToBottom();

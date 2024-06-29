@@ -62,7 +62,7 @@ class _DiscussionContainerState extends State<DiscussionContainer> {
   
   @override
   void dispose() {
-  
+
     super.dispose();
   }
 
