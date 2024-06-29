@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholariship/features/auth/presentation/index.dart';
 import 'package:scholariship/features/auth/presentation/widgets/password_input_field.dart';
-import '../../../../core/config/injection_container.dart';
 import '../../../../global/utils/input_validate.dart';
 import '../../../../global/widgets/custom_button.dart';
 

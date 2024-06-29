@@ -6,7 +6,6 @@ import 'package:scholariship/features/connection/data/request/connection_request
 import 'package:scholariship/features/connection/domain/usecases/get_connection_request_received.dart';
 
 import '../../../../../global/utils/map_failure_message.dart';
-import '../../../../profile/domain/usecases/get_user_profile.dart';
 
 part 'connection_request_event.dart';
 part 'connection_request_state.dart';

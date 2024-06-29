@@ -1,50 +1,45 @@
+import 'package:scholariship/features/messages/models/user.dart';
 
-import 'package:equatable/equatable.dart';
-
-import 'user.dart';
-
-class Message extends Equatable{
+class Message {
   final String id;
-  final String senderId;
-  final String recieverId;
-  final String conversationId;
   final String content;
+  final String senderId;
+  final String receiverId;
   final DateTime sentAt;
+  final String conversationId;
   final User sender;
-  
+
   const Message({
-    required this.id, 
-    required this.senderId, 
-    required this.content, 
-    required this.recieverId, 
+    required this.id,
+    required this.content,
+    required this.senderId,
+    required this.receiverId,
     required this.sentAt,
     required this.conversationId,
-    required this.sender
-    });
+    required this.sender,
+  });
 
-  factory Message.fromJson(Map<String, dynamic> json)  {
+  factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
-      id: json['id'] as String,
-      senderId: json['senderId'] as String,
-      recieverId: json['recieverId'] as String,
-      conversationId: json['conversationId'] as String,
-      content: json['content'] as String,
-      sentAt: DateTime.parse(json['sentAt'] as String),
-      sender: User.fromJson(json['sender'] as Map<String, dynamic>)
+      id: json['id'],
+      content: json['content'],
+      senderId: json['senderId'],
+      receiverId: json['receiverId'],
+      sentAt: DateTime.parse(json['sentAt']),
+      conversationId: json['conversationId'],
+      sender: User.fromJson(json['sender']),
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
-      'recieverId': recieverId,
-      'conversationId': conversationId,
       'content': content,
+      'receiverId': receiverId,
+      'conversationId': conversationId,
     };
   }
-  @override
-  // TODO: implement props
-  List<Object?> get props => [id,recieverId, senderId, conversationId, content, sentAt];
-  
 }
+
 
 
   

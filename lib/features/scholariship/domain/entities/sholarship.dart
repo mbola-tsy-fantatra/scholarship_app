@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:scholariship/features/scholariship/domain/entities/profile_saved.dart';
 
-import '../../../connection/domain/entities/profile.dart';
 
 class Scholarship extends Equatable{
   final String id;

@@ -1,6 +1,5 @@
 import 'package:scholariship/features/connection/domain/entities/connection.dart';
 
-import '../../domain/entities/connnection_item.dart';
 import 'connection_item_model.dart';
 
 class ConnectionModel extends Connection {

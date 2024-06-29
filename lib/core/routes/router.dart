@@ -43,12 +43,9 @@ class AppRouter extends $AppRouter {
         page:SettingRoute.page
     ),
     AutoRoute(
-        path: '/request',
-        page: RequestRoute.page
-    ),
-    AutoRoute(
-        path: '/request-sent',
-        page: RequestSentRoute.page
-    ),
+      page: DiscussionRoute.page,
+      path: '/discussions/:conversationId',
+      guards: [AuthGuard(sl<SharedPreferences>())]
+    )
   ];
 }
