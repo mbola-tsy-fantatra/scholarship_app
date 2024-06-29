@@ -55,5 +55,9 @@ class AppRouter extends $AppRouter {
         path: '/request-sent',
         page: RequestSentRoute.page
     ),
+    AutoRoute(
+        path: '/profile/:profileId',
+        page: ProfileRoute.page
+    ),
   ];
 }
