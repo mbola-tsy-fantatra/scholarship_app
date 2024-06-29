@@ -82,9 +82,9 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
                   child: TextField(
                     controller: queryController,
                     decoration: InputDecoration(
-                      labelText: 'Search Field',
+                      labelText: 'Search scholarship',
                       // border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
+                      prefixIcon: IconButton(
                         icon: const Icon(Icons.search),
                         onPressed: _search,
                       ),
