@@ -1,5 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scholariship/core/routes/router.gr.dart';
+import 'package:scholariship/features/connection/presentation/index.dart';
+import 'package:scholariship/features/connection/presentation/widgets/connection_item.dart';
+
+import '../../../../core/config/injection_container.dart';
 
 @RoutePage()
 class ConnectionScreen extends StatelessWidget {
@@ -8,104 +15,69 @@ class ConnectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          const SliverAppBar(
-            pinned: true,
-            title: Text('Connections'),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                const CircleAvatar(
-                  backgroundColor: Colors.amber,
-                  child: Text('AH'),
+        body: BlocProvider(
+          create: (context)=> sl<ConnectionBloc>(),
+          child: CustomScrollView(
+            slivers: <Widget>[
+              const SliverAppBar(
+                pinned: true,
+                title: Row(
+                  children: [
+                    Text("Connections")
+                  ],
                 ),
-                const CircleAvatar(
-                  backgroundColor: Colors.red,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),const CircleAvatar(
-                backgroundColor: Colors.black45,
-                child: Text('AH'),
               ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                        padding: const EdgeInsets.all(16),
+                        child:
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                context.router.push(const RequestRoute());
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(10.0)
+                                ),
+                                // decoration: ,
+                                child:  const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 6,horizontal: 12),
+                                    child: Text("Request ",style: TextStyle(fontSize: 18),)
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 20 ,),
+                            InkWell(
+                              onTap: (){
+                                context.router.push(const RequestSentRoute());
+                              },
+                              child:Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(10.0)
+                                ),
+                                // decoration: ,
+                                child:  const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 6,horizontal: 12),
+                                    child: Text("Request sent",style: TextStyle(fontSize: 18),)
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                    ),
+                    const ConnectionItemWidget()
+                  ],
                 ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-                const CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: Text('AH'),
-                ),
-
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        )
     );
   }
 }
