@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class ConnectionProfile extends StatelessWidget {
@@ -13,11 +14,14 @@ class ConnectionProfile extends StatelessWidget {
   return  Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
+        SizedBox(
           height: 55,
           width: 55,
           child:InkWell(
-            child: CircleAvatar(
+            onTap: (){
+              context.router.pushNamed('/profile/$userId');
+            },
+            child: const CircleAvatar(
               backgroundImage: AssetImage("assets/honami.jpg"),
             ),
           ) ,
