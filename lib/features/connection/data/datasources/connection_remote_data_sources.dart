@@ -72,7 +72,7 @@ class ConnectionRemoteDataSourceImpl implements ConnectionRemoteDataSources{
     );
     if (response.statusCode == 200) {
       print(response.body);
-      return jsonDecode(response.body);
+      return ConnectionModel.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }

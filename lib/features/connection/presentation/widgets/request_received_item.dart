@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scholariship/features/connection/presentation/widgets/connection_profile.dart';
+
+import '../../domain/entities/connection_received.dart';
 
 class RequestReceivedItem extends StatelessWidget {
 
-  const RequestReceivedItem({super.key});
+  final ConnectionReceived connection;
+
+  const RequestReceivedItem({super.key,required this.connection});
 
 
   @override
@@ -13,28 +18,7 @@ class RequestReceivedItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 55,
-                  width: 55,
-                  child:InkWell(
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage("assets/honami.jpg"),
-                    ),
-                  ) ,
-                ),
-                const SizedBox(width: 10,),
-                Column(
-                  children: [
-                    const Text("Mitsuri kanroji",style: TextStyle(fontSize: 17),),
-                    const SizedBox(height: 5,),
-                    Text("10 mutual friends",style: TextStyle(color: Colors.black.withOpacity(0.7)),)
-                  ],
-                )
-              ],
-            ),
+          ConnectionProfile(name: connection.sender.username, userId: connection.senderId, mutualFriends: 5,),
            Row(
              children: [
                Container(

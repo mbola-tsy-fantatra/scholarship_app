@@ -25,11 +25,25 @@ class RequestSentScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context)=> sl<ConnectionSentBloc>(),
-        child: const Column(
-          children: [
-            RequestSentItem()
-          ],
-        ),
+        child: BlocBuilder<ConnectionSentBloc,ConnectionSentState>(
+          builder: (BuildContext context, ConnectionSentState state) {
+            if(state is Loading){
+              return const Center(child: CircularProgressIndicator());
+            }else if(state is Loaded){
+              return ListView.builder(
+                  itemCount: state.connection.length,
+                  itemBuilder: (context,index){
+                    return RequestSentItem(connectionSender: state.connection[index],);
+                  }
+              );
+            }else if(state is ErrorState){
+              return Center(child: Text('Failed to load scholarships: ${state.message}'));
+            }else{
+              return Container();
+            }
+          },
+
+        )
       ),
     );
   }

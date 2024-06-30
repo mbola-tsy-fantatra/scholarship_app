@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:scholariship/features/connection/domain/entities/connection_received.dart';
 import 'package:scholariship/features/connection/domain/entities/connection_sender.dart';
 
 import '../../../../../global/utils/map_failure_message.dart';
@@ -25,7 +26,7 @@ class ConnectionSentBloc extends Bloc<ConnectionSentEvent, ConnectionSentState> 
     response.fold((failure){
       emit(ErrorState(message: mapFailureToMessage(failure)));
     }, (connections){
-      emit(connections);
+      emit(Loaded(connection: connections));
     });
   }
 
