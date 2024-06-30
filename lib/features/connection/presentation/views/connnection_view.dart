@@ -24,8 +24,25 @@ class ConnectionScreen extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.all(16),
               sliver: SliverToBoxAdapter(
-                child: Row(
+                child: Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
                   children: [
+                    InkWell(
+                      onTap: () {
+                        context.router.push(const SuggestionRoute());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                          child: Text("Suggestions", style: TextStyle(fontSize: 18)),
+                        ),
+                      ),
+                    ),
                     InkWell(
                       onTap: () {
                         context.router.push(const RequestRoute());

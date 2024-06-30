@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:scholariship/core/usecases/usecase.dart';
-import 'package:scholariship/features/scholariship/domain/entities/country.dart';
 import 'package:scholariship/features/scholariship/domain/repository/scholarship_repository.dart';
 import 'package:scholariship/global/error/failure.dart';
+
+import '../../../../core/entity/country.dart';
 
 class GetCountries extends UseCase<List<Country>,NoParams>{
 
