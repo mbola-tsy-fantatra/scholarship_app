@@ -8,6 +8,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: TextButton(
+        onPressed: () {
+          context.router.pushNamed('/splash-screen');
+        },
+        child: const Text('go to splash screen'),
+      ),
+    );
   }
 }

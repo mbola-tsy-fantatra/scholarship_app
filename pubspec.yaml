@@ -53,6 +53,7 @@ dependencies:
   socket_io_client: ^3.0.0-beta.2
   provider: ^6.1.2
   connectivity_plus: ^6.0.3
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,10 @@ flutter:
   assets:
    - .env
    - assets/honami.jpg
+   - assets/people_network.svg
+   - assets/scholarnet_logo.png
+   - assets/people_network.png
+   - assets/splash_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -33,7 +33,12 @@ class ConversationRepository {
           final conversation = Conversation.fromJson(convJson as Map<String, dynamic>);
           _conversations.add(conversation);
         }
-        _conversations.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+        _conversations.sort((a, b) {
+          DateTime lastMessageA = a.messages.isNotEmpty ? a.messages.first!.sentAt : DateTime(0);
+          DateTime lastMessageB = b.messages.isNotEmpty ? b.messages.first!.sentAt : DateTime(0);
+          return lastMessageB.compareTo(lastMessageA);
+        });
+
         _conversationStreamController.add(_conversations);
       } else {
         _conversationStreamController.add([]);
@@ -54,7 +59,11 @@ class ConversationRepository {
         conversation.messages.removeLast();
         conversation.messages.add(message);
         _conversations.add(conversation);
-        conversations.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+        _conversations.sort((a, b) {
+          DateTime lastMessageA = a.messages.isNotEmpty ? a.messages.first!.sentAt : DateTime(0);
+          DateTime lastMessageB = b.messages.isNotEmpty ? b.messages.first!.sentAt : DateTime(0);
+          return lastMessageB.compareTo(lastMessageA);
+        });
         _conversationStreamController.add(_conversations);
       }
     } catch (e) {

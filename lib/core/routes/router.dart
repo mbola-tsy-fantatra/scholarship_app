@@ -55,5 +55,10 @@ class AppRouter extends $AppRouter {
         path: '/request-sent',
         page: RequestSentRoute.page
     ),
+    AutoRoute(
+      path: '/splash-screen',
+      page: SplashRoute.page
+    )
+
   ];
 }
