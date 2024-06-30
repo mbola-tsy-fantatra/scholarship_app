@@ -18,18 +18,24 @@ class ConversationItem extends StatelessWidget {
     User friendInfo = conversation.participants.participantA.id == userId ? conversation.participants.participantB : conversation.participants.participantA;
   
     //final String? profilePicture = conversation.participants.participantA.profile.profilePicture;
-    final  isConversationMessageEmpty = conversation.messages.elementAtOrNull(0);
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Colors.orange,
-        backgroundImage: NetworkImage('https://ui-avatars.com/api/?name=${friendInfo.username}'),
+    final  isConversationMessageNotEmpty = conversation.messages.elementAtOrNull(0) != null;
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 2.0),
+      decoration: const BoxDecoration(
+        color: Colors.white
       ),
-      title: Text(friendInfo.username, style: Theme.of(context).textTheme.titleMedium,),
-      subtitle: Text(isConversationMessageEmpty != null? substractString(0, 30, conversation.messages.first!.content) : 'Start new  conversation now ...' ),
-      trailing: Text( isConversationMessageEmpty != null? formatDate(conversation.messages[0]!.sentAt): ''),
-      onTap: () {
-        context.router.pushNamed('/discussions/${conversation.id}');
-      },
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Colors.orange,
+          backgroundImage: NetworkImage('https://ui-avatars.com/api/?name=${friendInfo.username}'),
+        ),
+        title: Text(friendInfo.username, style: Theme.of(context).textTheme.titleMedium,),
+        subtitle: Text(isConversationMessageNotEmpty ? substractString(0, 30, conversation.messages.first!.content) : 'Start new  conversation now ...' ),
+        trailing: Text( isConversationMessageNotEmpty ? formatDate(conversation.messages[0]!.sentAt): ''),
+        onTap: () {
+          context.router.pushNamed('/discussions/${conversation.id}');
+        },
+      ),
     );
   }
 }

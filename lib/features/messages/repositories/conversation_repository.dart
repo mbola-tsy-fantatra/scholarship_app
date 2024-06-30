@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:scholariship/core/services/websocket_manager.dart';
 import 'package:scholariship/features/messages/models/conversation.dart';
+import 'package:scholariship/features/messages/models/messages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConversationRepository {
@@ -15,27 +16,51 @@ class ConversationRepository {
 
   ConversationRepository({required this.socketManager, required this.sharedPreferences}){
      socketManager.onEvent('chat:conversation:list:loaded', (data) {
-     try {
-          print('Data received from socket: $data');
+        handleConversationListLoadedEvent(data);
+     });
+     socketManager.onEvent('chat:message:new', (data) {
+       handleMessageReceivedEvent(data);
+     });
+  }
+  void handleConversationListLoadedEvent(Map<String, dynamic> data) {
+    try {
+      print('Data received from socket: $data');
 
-          if (data is Map<String, dynamic> && data.containsKey('conversations')) {
-            var conversationsFromJson = data['conversations'];
-            _conversations.clear();
-            for (var convJson in conversationsFromJson) {
-              final conversation = Conversation.fromJson(convJson as Map<String, dynamic>);
-              _conversations.add(conversation);
-            }
-            _conversationStreamController.add(_conversations);
-          } else {
-            _conversationStreamController.add([]);
-          }
-      
-      } catch (e) {
-        print('Error processing data received from socket: $e');
-        _conversationStreamController.addError(e);
+      if (data.containsKey('conversations')) {
+        var conversationsFromJson = data['conversations'];
+        _conversations.clear();
+        for (var convJson in conversationsFromJson) {
+          final conversation = Conversation.fromJson(convJson as Map<String, dynamic>);
+          _conversations.add(conversation);
+        }
+        _conversations.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+        _conversationStreamController.add(_conversations);
+      } else {
+        _conversationStreamController.add([]);
       }
-});
 
+    } catch (e) {
+      print('Error processing data received from socket: $e');
+      _conversationStreamController.addError(e);
+    }
+  }
+  void handleMessageReceivedEvent(Map<String, dynamic> data) {
+    try {
+      print('Message received from socket: $data');
+      if (data.containsKey('message') && _conversations.isNotEmpty) {
+        final message = Message.fromJson(data['message'] as Map<String, dynamic>);
+        Conversation conversation = _conversations.where((conversation) => conversation.id == message.conversationId).first;
+        _conversations.remove(conversation);
+        conversation.messages.removeLast();
+        conversation.messages.add(message);
+        _conversations.add(conversation);
+        conversations.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+        _conversationStreamController.add(_conversations);
+      }
+    } catch (e) {
+      print('Error processing message received from socket: $e');
+      _conversationStreamController.addError(e);
+    }
   }
   Stream<List<Conversation>> get conversationStream => _conversationStreamController.stream;
 

@@ -25,8 +25,8 @@ class DiscussionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<MessageRepositiory>(
-          create: (_) => di.sl<MessageRepositiory>(),
+        Provider<MessageRepository>(
+          create: (_) => di.sl<MessageRepository>(),
         ),
       ],
       child: DiscussionContainer(conversationId: conversationId),
@@ -44,7 +44,7 @@ class DiscussionContainer extends StatefulWidget {
 }
 
 class _DiscussionContainerState extends State<DiscussionContainer> {
-  late final MessageRepositiory messageRepository;
+  late final MessageRepository messageRepository;
   final ScrollController _scrollController = ScrollController();
   void scrollToBottom() {
     _scrollController.animateTo(
@@ -56,7 +56,7 @@ class _DiscussionContainerState extends State<DiscussionContainer> {
   @override
   void initState() {
     super.initState();
-     messageRepository = Provider.of<MessageRepositiory>(context, listen: false);
+     messageRepository = Provider.of<MessageRepository>(context, listen: false);
     messageRepository.sendMessage('chat:conversation:join', {'conversationId': widget.conversationId});
   }
   
@@ -68,7 +68,7 @@ class _DiscussionContainerState extends State<DiscussionContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final messageRepository = Provider.of<MessageRepositiory>(context);
+    final messageRepository = Provider.of<MessageRepository>(context);
     return StreamBuilder<Conversation?>(
       stream: messageRepository.conversationStream,
       builder: (context, snapshot) {

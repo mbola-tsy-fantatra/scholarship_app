@@ -49,7 +49,7 @@ Future<void> init()async {
   //feature Messaging
   sl.registerLazySingleton<SocketManager>(() => SocketManager(sharedPreferences: sl()));
   sl.registerLazySingleton<ConversationRepository>(() => ConversationRepository(socketManager: sl(), sharedPreferences: sl()));
-  sl.registerLazySingleton<MessageRepositiory>(() => MessageRepositiory(socketManager: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton<MessageRepository>(() => MessageRepository(socketManager: sl(), sharedPreferences: sl()));
 
   //)
   //! Feature - Auth

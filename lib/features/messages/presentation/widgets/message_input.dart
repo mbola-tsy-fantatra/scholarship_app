@@ -28,7 +28,7 @@ class MessageInput extends StatelessWidget {
           IconButton(
             icon: const  Icon(Icons.send),
             onPressed: () {
-              final messageRepository = Provider.of<MessageRepositiory>(context, listen: false);
+              final messageRepository = Provider.of<MessageRepository>(context, listen: false);
               final participants = messageRepository.conversation.participants;
               print(messageRepository.userId);
               print('A:${participants.participantA.id}');

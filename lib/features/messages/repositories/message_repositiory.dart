@@ -5,7 +5,7 @@ import 'package:scholariship/features/messages/models/conversation.dart';
 import 'package:scholariship/features/messages/models/messages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MessageRepositiory{
+class MessageRepository{
   final SocketManager socketManager;
   final SharedPreferences sharedPreferences;
   final StreamController<Conversation?> _conversationStreamController = StreamController<Conversation>.broadcast();
@@ -14,7 +14,7 @@ class MessageRepositiory{
   
   Conversation? _conversation;
   String get userId => sharedPreferences.getString('user_id')!;
-  MessageRepositiory({ required this.socketManager, required this.sharedPreferences}){
+  MessageRepository({ required this.socketManager, required this.sharedPreferences}){
     socketManager.onEvent('chat:conversation:messages', (data) {
         handleChatConversationMessagesEvent(data);
     });

@@ -59,8 +59,8 @@ class SocketManager {
 
     if (_socket != null) {
       disconnect();
+      await connect('${dotenv.env['SOCKET_URL']}', _accessToken!);
     }
-    await connect('${dotenv.env['SOCKET_URL']}', _accessToken!);
   }
 
   // Close the connection
@@ -69,3 +69,5 @@ class SocketManager {
     _socket = null;
   }
 }
+
+
