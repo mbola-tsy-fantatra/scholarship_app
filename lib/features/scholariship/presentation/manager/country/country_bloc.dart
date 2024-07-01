@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../../../../core/entity/country.dart';
 import '../../../../../global/utils/map_failure_message.dart';
-import '../../../domain/entities/country.dart';
 import '../../../domain/usecases/get_countries.dart';
 
 part 'country_event.dart';

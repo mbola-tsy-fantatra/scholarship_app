@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:scholariship/features/scholariship/data/request/create_scholarship.dart';
 import 'package:scholariship/features/scholariship/domain/entities/academic.dart';
-import 'package:scholariship/features/scholariship/domain/entities/country.dart';
-import 'package:scholariship/features/scholariship/domain/entities/studyLevel.dart';
+import 'package:scholariship/core/entity/studyLevel.dart';
 import 'package:scholariship/global/error/failure.dart';
 
+import '../../../../core/entity/country.dart';
 import '../entities/sholarship.dart';
 
 abstract class ScholarshipRepository{

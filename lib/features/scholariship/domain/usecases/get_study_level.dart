@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:scholariship/core/usecases/usecase.dart';
-import 'package:scholariship/features/scholariship/domain/entities/studyLevel.dart';
+import 'package:scholariship/core/entity/studyLevel.dart';
 import 'package:scholariship/features/scholariship/domain/repository/scholarship_repository.dart';
 import 'package:scholariship/global/error/failure.dart';
 

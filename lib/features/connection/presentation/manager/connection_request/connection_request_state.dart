@@ -15,7 +15,7 @@ class Loading extends ConnectionRequestState{
 }
 
 class Loaded extends ConnectionRequestState{
-  final List<ConnectionRequest> connection;
+  final List<ConnectionReceived> connection;
 
   const Loaded({required this.connection});
 

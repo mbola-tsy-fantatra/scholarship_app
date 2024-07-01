@@ -13,7 +13,7 @@ class GetConnectionRequest extends UseCase<Connection,Params>{
   GetConnectionRequest({required this.connectionRepository});
 
   @override
-  Future<Either<Failure, Connection?>?> call(Params params) async{
+  Future<Either<Failure, Connection>?> call(Params params) async{
     return await connectionRepository.getConnectionRequest(params.limit, params.page);
   }
 

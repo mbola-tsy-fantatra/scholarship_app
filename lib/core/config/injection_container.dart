@@ -14,9 +14,11 @@ import 'package:scholariship/features/connection/data/repository/connection_repo
 import 'package:scholariship/features/connection/domain/repository/connection_repository.dart';
 import 'package:scholariship/features/connection/domain/usecases/get_connection_request_received.dart';
 import 'package:scholariship/features/connection/domain/usecases/get_connection_request_sent.dart';
+import 'package:scholariship/features/connection/domain/usecases/get_connection_suggestion.dart';
 import 'package:scholariship/features/connection/presentation/index.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_request/connection_request_bloc.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_sent/connection_sent_bloc.dart';
+import 'package:scholariship/features/connection/presentation/manager/suggestion/suggestion_bloc.dart';
 import 'package:scholariship/features/messages/repositories/conversation_repository.dart';
 import 'package:scholariship/features/messages/repositories/message_repositiory.dart';
 import 'package:scholariship/features/profile/data/datasources/user_remote_data_source.dart';
@@ -122,12 +124,14 @@ Future<void> init()async {
   sl.registerFactory(()=>ConnectionBloc(getConnectionRequest: sl()));
   sl.registerFactory(()=>ConnectionRequestBloc(getConnectionRequestReceived: sl()));
   sl.registerFactory(()=>ConnectionSentBloc(getConnectionRequestSent: sl()));
+  sl.registerFactory(()=>SuggestionBloc(getSuggestion: sl()));
 
   //UseCases
   sl.registerLazySingleton(()=>SendConnectionRequest(connectionRepository: sl()));
   sl.registerLazySingleton(()=>GetConnectionRequestReceived(connectionRepository: sl()));
   sl.registerLazySingleton(()=>GetConnectionRequestSent(connectionRepository: sl()));
   sl.registerLazySingleton(()=>GetConnectionRequest(connectionRepository: sl()));
+  sl.registerLazySingleton(()=>GetConnectionSuggestion(repository: sl()));
 
   //Repository
   sl.registerLazySingleton<ConnectionRepository>(()=>ConnectionRepositoryImpl(remoteDataSources: sl()));

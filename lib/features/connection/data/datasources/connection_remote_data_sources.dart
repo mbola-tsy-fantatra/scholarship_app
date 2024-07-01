@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:scholariship/features/connection/data/models/user_profile_model.dart';
 import 'package:scholariship/features/connection/data/request/connection_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +14,7 @@ abstract class ConnectionRemoteDataSources{
     Future<List<ConnectionReceivedModel>> getConnectionReceived(int limit,int page);
     Future<ConnectionModel> getConnections(int limit,int page);
     Future<ConnectionSenderModel> sendConnectionRequest(ConnectionRequest connectionRequest );
+    Future<List<UserProfileModel>> getUserProfile();
 }
 
 class ConnectionRemoteDataSourceImpl implements ConnectionRemoteDataSources{
@@ -72,7 +74,7 @@ class ConnectionRemoteDataSourceImpl implements ConnectionRemoteDataSources{
     );
     if (response.statusCode == 200) {
       print(response.body);
-      return jsonDecode(response.body);
+      return ConnectionModel.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }
@@ -92,6 +94,25 @@ class ConnectionRemoteDataSourceImpl implements ConnectionRemoteDataSources{
     if (response.statusCode == 200) {
       print(response.body);
       return jsonDecode(response.body);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<UserProfileModel>> getUserProfile() async{
+    final String? token = sharedPreferences.getString('access_token');
+    final url = Uri.parse('${dotenv.env['BASE_URL']!}/profiles');
+    final response = await client.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      List<dynamic> jsonResponse = jsonDecode(response.body);
+      return jsonResponse.map((data) => UserProfileModel.fromJson(data)).toList();
     } else {
       throw ServerException();
     }
