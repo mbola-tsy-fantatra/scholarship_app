@@ -2,18 +2,14 @@ part of 'suggestion_bloc.dart';
 
 abstract class SuggestionState extends Equatable {
   const SuggestionState();
-}
 
-class Empty extends SuggestionState {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
+class Empty extends SuggestionState {}
 
-class Loading extends SuggestionState{
-  @override
-  List<Object> get props => [];
-}
+class Loading extends SuggestionState {}
 
 class Loaded extends SuggestionState {
   final List<UserProfile> profiles;
@@ -26,8 +22,9 @@ class Loaded extends SuggestionState {
 
 class ErrorState extends SuggestionState {
   final String message;
-  const ErrorState({required this.message});
-  @override
-  List<Object?> get props => [];
-}
 
+  const ErrorState({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}

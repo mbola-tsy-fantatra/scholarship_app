@@ -19,6 +19,7 @@ import 'package:scholariship/features/connection/domain/usecases/get_connection_
 import 'package:scholariship/features/connection/presentation/index.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_request/connection_request_bloc.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_sent/connection_sent_bloc.dart';
+import 'package:scholariship/features/connection/presentation/manager/send_request/send_request_bloc.dart';
 import 'package:scholariship/features/connection/presentation/manager/suggestion/suggestion_bloc.dart';
 import 'package:scholariship/features/messages/repositories/conversation_repository.dart';
 import 'package:scholariship/features/messages/repositories/message_repositiory.dart';
@@ -126,6 +127,7 @@ Future<void> init()async {
   sl.registerFactory(()=>ConnectionRequestBloc(getConnectionRequestReceived: sl()));
   sl.registerFactory(()=>ConnectionSentBloc(getConnectionRequestSent: sl()));
   sl.registerFactory(()=>SuggestionBloc(getSuggestion: sl()));
+  sl.registerFactory(()=>SendRequestBloc(sendConnectionRequest: sl()));
 
   //UseCases
   sl.registerLazySingleton(()=>SendConnectionRequest(connectionRepository: sl()));
