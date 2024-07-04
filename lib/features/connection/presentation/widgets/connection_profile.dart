@@ -28,6 +28,7 @@ class ConnectionProfile extends StatelessWidget {
         ),
         const SizedBox(width: 10,),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(name,style: const TextStyle(fontSize: 17),),
             const SizedBox(height: 5,),

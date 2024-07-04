@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:scholariship/features/connection/data/datasources/connection_remote_data_sources.dart';
+import 'package:scholariship/features/connection/data/request/connection_reply.dart';
 import 'package:scholariship/features/connection/domain/entities/connection.dart';
 import 'package:scholariship/features/connection/domain/entities/connection_received.dart';
 import 'package:scholariship/features/connection/domain/entities/connection_sender.dart';
@@ -66,6 +67,16 @@ class ConnectionRepositoryImpl implements ConnectionRepository{
       return Left(ServerFailure());
     }
 
+  }
+
+  @override
+  Future<Either<Failure, void>> replyToRequest(ConnectionReply connectionReply) async{
+    try{
+      final  response = await remoteDataSources.requestReply(connectionReply);
+      return const Right("");
+    }on ServerException{
+      return Left(ServerFailure());
+    }
   }
 
 
