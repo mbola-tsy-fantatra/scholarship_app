@@ -1,25 +1,43 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+
 
 class ProfileWidget extends StatelessWidget {
-  final String imagePath;
+  final String? imagePath;//
+  final File? imageFile;
   final VoidCallback onClicked;
   const ProfileWidget(
-      {super.key, required this.imagePath, required this.onClicked});
+      {super.key, this.imagePath, this.imageFile, required this.onClicked});
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primary;
     return Center(
       child: Stack(
-        children: [buildImage()],
+        children: [
+          buildImage(_getImageProvider()),
+          Positioned(
+              bottom: 25,
+              right: 12,
+              child: buildEditIcon(color)
+          )
+        ],
       ),
     );
   }
+  ImageProvider _getImageProvider() {
+    if (imagePath != null) {
+      return NetworkImage(imagePath!);
+    } else if (imageFile != null) {
+      return FileImage(imageFile!);
+    } else {
+      return const AssetImage('assets/avatar.png'); // Fallback image
+    }
+  }
 
-  Widget buildImage() {
-    final image = NetworkImage(imagePath);
+
+  Widget buildImage(ImageProvider image) {
     return ClipOval(
       child: Material(
         color: Colors.transparent,

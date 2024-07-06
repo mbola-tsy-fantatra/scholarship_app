@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:auto_route/annotations.dart';
-import 'package:flutter/material.dart';
 
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
 @RoutePage()
 class SplashScreen extends StatelessWidget {
@@ -10,20 +10,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const assetName = 'assets/people_network.png';
-    const logo = 'assets/scholarnet_logo.png';
-    final width = MediaQuery.of(context).size.width;
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            Positioned(
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: buildImage(logo, 25, BoxFit.none),
-            ),
             Positioned(
               top: 10,
               left: 15,
@@ -55,6 +45,8 @@ class SplashScreen extends StatelessWidget {
             Positioned.fill(
               child: paint(
                 Colors.white.withOpacity(0.2),
+                75.0,
+                95.0,
               ),
             ),
             Column(
@@ -94,23 +86,21 @@ class SplashScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 32.0, left: 32, right: 32),
-                  child: ButtonWidget(),
-                )
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 32.0, left: 32, right: 32),
+                  child: ButtonWidget(
+                    onPressed: () {
+                      context.router.pushNamed('/profile-creation/:userId');
+                    },
+                    label: 'Get started',
+                  ),
+                ),
               ],
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget paint(Color color) {
-    return ClipRect(
-      child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 75.0, sigmaY: 95.0),
-          child: const SizedBox.shrink()),
     );
   }
 
@@ -121,8 +111,18 @@ class SplashScreen extends StatelessWidget {
       );
 }
 
+Widget paint(Color color, double sigmaX, double sigmaY) {
+  return ClipRect(
+    child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: 95.0),
+        child: const SizedBox.shrink()),
+  );
+}
+
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({super.key});
+  final VoidCallback onPressed;
+  final String label;
+  const ButtonWidget({super.key, required this.onPressed, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -130,20 +130,20 @@ class ButtonWidget extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-
+          onPressed();
         },
         style: ElevatedButton.styleFrom(
-          minimumSize: const Size(double.infinity, 56) ,
+          minimumSize: const Size(double.infinity, 56),
           maximumSize: const Size(double.infinity, 64),
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
           backgroundColor: Theme.of(context).colorScheme.primary,
-          foregroundColor: Theme.of(context).colorScheme.onPrimary ,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
           textStyle: const TextStyle(fontSize: 18), //
         ),
-        child: const Text('Get Started'),
+        child: Text(label),
       ),
     );
   }
