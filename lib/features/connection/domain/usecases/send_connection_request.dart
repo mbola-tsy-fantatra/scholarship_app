@@ -14,7 +14,7 @@ class SendConnectionRequest extends UseCase<ConnectionSender,Params>{
 
   @override
   Future<Either<Failure, ConnectionSender?>?> call(Params params) async{
-    return connectionRepository.sendConnectionRequest(params.connectionRequest);
+    return await connectionRepository.sendConnectionRequest(params.connectionRequest);
   }
 
 }

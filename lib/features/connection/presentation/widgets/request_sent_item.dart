@@ -17,7 +17,12 @@ class RequestSentItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ConnectionProfile(name: connectionSender.receiver.username, userId: "1", mutualFriends: 5,),
+            ConnectionProfile(
+              name: connectionSender.receiver.username,
+              userId: "1",
+              mutualFriends: 5,
+              profileUrl: connectionSender.receiver.profile.profilePicture,
+            ),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.purple, // Background color
