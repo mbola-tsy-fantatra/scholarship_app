@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:scholariship/core/model/country_model.dart';
+import 'package:scholariship/core/model/study_level_model.dart';
 import 'package:scholariship/features/scholariship/data/models/academic_model.dart';
-import 'package:scholariship/features/scholariship/data/models/country_model.dart';
-import 'package:scholariship/features/scholariship/data/models/study_level_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileRepository {
