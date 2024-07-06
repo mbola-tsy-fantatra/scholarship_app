@@ -23,7 +23,11 @@ class RequestSuggestionItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ConnectionProfile(name: profile.user.username, userId: profile.user.id, mutualFriends: 5,),
+            ConnectionProfile(
+              name: profile.user.username,
+              userId: profile.user.id,
+              profileUrl: profile.profilePicture,
+              mutualFriends: 5,),
             TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.purple, // Background color

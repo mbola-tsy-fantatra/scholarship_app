@@ -7,34 +7,46 @@ class ConnectionProfile extends StatelessWidget {
   final String userId;
   final String? profileUrl;
 
-  const ConnectionProfile({super.key,this.profileUrl,required this.name,this.mutualFriends,required this.userId});
+  const ConnectionProfile({super.key, this.profileUrl, required this.name, this.mutualFriends, required this.userId});
 
   @override
   Widget build(BuildContext context) {
-  return  Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 55,
           width: 55,
-          child:InkWell(
-            onTap: (){
+          child: InkWell(
+            onTap: () {
               context.router.pushNamed('/profile/$userId');
             },
-            child: const CircleAvatar(
-              backgroundImage: AssetImage("assets/honami.jpg"),
+            child: CircleAvatar(
+              backgroundImage: profileUrl != null
+                  ? const AssetImage('assets/honami.jpg')
+                  : const AssetImage('assets/honami.jpg') as ImageProvider,
+              onBackgroundImageError: (_, __) => const Icon(Icons.error),
+              child: profileUrl == null
+                  ? const Icon(Icons.person)
+                  : null,
             ),
-          ) ,
+          ),
         ),
-        const SizedBox(width: 10,),
+        const SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(name,style: const TextStyle(fontSize: 17),),
-            const SizedBox(height: 5,),
-            Text("10 mutual friends",style: TextStyle(color: Colors.black.withOpacity(0.7)),)
+            Text(
+              name,
+              style: const TextStyle(fontSize: 17),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              "$mutualFriends mutual friends",
+              style: TextStyle(color: Colors.black.withOpacity(0.7)),
+            ),
           ],
-        )
+        ),
       ],
     );
   }

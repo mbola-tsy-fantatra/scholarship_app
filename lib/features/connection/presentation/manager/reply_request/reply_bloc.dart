@@ -22,7 +22,7 @@ class ReplyBloc extends Bloc<ReplyEvent, ReplyState> {
   }
     Future<void> _acceptRequest(AcceptRequest event,Emitter emit)async{
         emit(Loading());
-        final response = await acceptRequestUseCase(ReplyParams(connectionReply: ConnectionReply(action: 'ACCEPTED', receiverId: event.receiverId)));
+        final response = await acceptRequestUseCase(ReplyParams(connectionReply: ConnectionReply(action: "ACCEPTED", senderId: event.receiverId)));
         response?.fold((failure){
           emit(ErrorState(message: mapFailureToMessage(failure)));
         }, (res){
@@ -31,7 +31,7 @@ class ReplyBloc extends Bloc<ReplyEvent, ReplyState> {
     }
   Future<void> _rejectRequest(RejectRequest event,Emitter emit)async{
         emit(Loading());
-        final response  = await rejectRequestUseCase(ReplyParams(connectionReply: ConnectionReply(action: 'DECLINED', receiverId: event.receiverId)));
+        final response  = await rejectRequestUseCase(ReplyParams(connectionReply: ConnectionReply(action: "DECLINED", senderId: event.receiverId)));
         response?.fold((failure){
           emit(ErrorState(message: mapFailureToMessage(failure)));
         }, (res){

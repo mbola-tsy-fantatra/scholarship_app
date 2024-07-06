@@ -128,12 +128,15 @@ class ConnectionRemoteDataSourceImpl implements ConnectionRemoteDataSources{
   @override
   Future<void> requestReply(ConnectionReply connectionReply) async{
     final String? token = sharedPreferences.getString('access_token');
-    final url = Uri.parse('${dotenv.env['BASE_URL']!}/profiles');
-    final response = await client.put(
+    final url = Uri.parse('${dotenv.env['BASE_URL']!}/connections/reply');
+    print(connectionReply.toJson());
+    final response = await client.patch(
         url,
         headers: {'Authorization': 'Bearer $token',},
         body:connectionReply.toJson()
     );
+    print(url);
+    print(response.statusCode);
     if(response.statusCode == 200){
 
     }else{
