@@ -1,4 +1,5 @@
-import '../../domain/entities/country.dart';
+
+import '../entity/country.dart';
 
 class CountryModel extends Country{
   const CountryModel({required super.countryId, required super.name});

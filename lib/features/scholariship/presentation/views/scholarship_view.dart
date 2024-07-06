@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import '../../../../core/config/injection_container.dart';
+import '../../../../core/entity/country.dart';
 import '../../../../core/routes/router.gr.dart';
-import '../../domain/entities/country.dart';
-import '../../domain/entities/studyLevel.dart';
+import '../../../../core/entity/studyLevel.dart';
 import '../manager/country/country_bloc.dart';
 import '../manager/scholarship/scholarship_bloc.dart';
 import '../manager/studylevel/study_level_bloc.dart';
@@ -82,9 +82,9 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
                   child: TextField(
                     controller: queryController,
                     decoration: InputDecoration(
-                      labelText: 'Search Field',
+                      labelText: 'Search scholarship',
                       // border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
+                      prefixIcon: IconButton(
                         icon: const Icon(Icons.search),
                         onPressed: _search,
                       ),

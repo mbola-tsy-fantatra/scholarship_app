@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:scholariship/features/scholariship/data/models/academic_model.dart';
-import 'package:scholariship/features/scholariship/data/models/country_model.dart';
-import 'package:scholariship/features/scholariship/data/models/study_level_model.dart';
+import 'package:scholariship/core/model/country_model.dart';
 import 'package:scholariship/features/scholariship/data/request/create_scholarship.dart';
 import 'package:scholariship/features/scholariship/domain/entities/sholarship.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/model/study_level_model.dart';
 import '../../../../global/error/exeception.dart';
 import '../models/scholarship_model.dart';
 import 'package:http/http.dart' as http;

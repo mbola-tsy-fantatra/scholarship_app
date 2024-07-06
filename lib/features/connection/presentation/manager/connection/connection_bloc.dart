@@ -8,7 +8,7 @@ import '../../../domain/usecases/get_connection_request.dart';
 part 'connection_event.dart';
 part 'connection_state.dart';
 
-class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
+class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionsState> {
   final GetConnectionRequest getConnectionRequest;
   ConnectionBloc({required this.getConnectionRequest}) : super(EmptyState()) {
     on<GetConnections>(_getConnectionList);
@@ -20,7 +20,7 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
       response?.fold((failure){
           emit(ErrorState(message: mapFailureToMessage(failure)));
       }, (connections){
-        emit(connections);
+        emit(Loaded(connection: connections));
       });
   }
 

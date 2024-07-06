@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../global/utils/map_failure_message.dart';
-import '../../../domain/entities/studyLevel.dart';
+import '../../../../../core/entity/studyLevel.dart';
 import '../../../domain/usecases/get_study_level.dart';
 
 part 'study_level_event.dart';

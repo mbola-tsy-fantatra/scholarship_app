@@ -56,13 +56,12 @@ class AppRouter extends $AppRouter {
         page: RequestSentRoute.page
     ),
     AutoRoute(
-      path: '/splash-screen',
-      page: SplashRoute.page
+        path: '/profile/:profileId',
+        page: ProfileRoute.page
     ),
     AutoRoute(
-        path: '/profile-creation/:userId',
-        page: ProfileCreationRoute.page
-    )
-
+        path: '/suggestions',
+        page: SuggestionRoute.page
+    ),
   ];
 }
