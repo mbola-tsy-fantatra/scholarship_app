@@ -1,26 +1,30 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:scholariship/core/dto/profile/create_profile_dto.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../global/error/exeception.dart';
-import '../models/user_model.dart';
+import '../models/profile_model.dart';
 
 abstract class UserRemoteDataSource {
-  Future<UserModel> getUserProfileInfo(String userId);
-  Future<UserModel> createUserProfile(CreateProfileDto profileDto);
-  Future<UserModel> updateProfile(CreateProfileDto profileDto);
+  Future<UserProfileModel> getUserProfileInfo(String userId);
+  Future<UserProfileModel> createUserProfile(CreateProfileDto profileDto);
+  Future<UserProfileModel> updateProfile(CreateProfileDto profileDto);
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final Dio dio;
+  final SharedPreferences sharedPreferences;
 
-  UserRemoteDataSourceImpl({required this.dio});
+  UserRemoteDataSourceImpl({required this.dio,required this.sharedPreferences});
 
   @override
-  Future<UserModel> getUserProfileInfo(String userId) async {
-    final url = '${dotenv.env['BASE_URL']}/user/profile/$userId';
-    const token = '';
-
-    try {
+  Future<UserProfileModel> getUserProfileInfo(String userId) async {
+    print(userId);
+    final url = '${dotenv.env['BASE_URL']}/profiles/$userId';
+    final String? token = sharedPreferences.getString('access_token');
+    print('userId: $userId');
       final response = await dio.get(
         url,
         options: Options(
@@ -29,19 +33,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           },
         ),
       );
-
       if (response.statusCode == 200) {
-        return UserModel.fromJson(response.data);
+        print( 'user profile :${response.data}');
+        return UserProfileModel.fromJson(response.data);
       } else {
         throw ServerException();
       }
-    } catch (e) {
-      throw ServerException(); // Handle Dio errors or other exceptions
-    }
   }
 
   @override
-  Future<UserModel> createUserProfile(CreateProfileDto profileDto) async {
+  Future<UserProfileModel> createUserProfile(CreateProfileDto profileDto) async {
     final url = '${dotenv.env['BASE_URL']}/user/profile';
     const token = '';
 
@@ -70,7 +71,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        return UserModel.fromJson(response.data);
+        return jsonDecode(response.data);
       } else {
         throw ServerException();
       }
@@ -80,7 +81,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<UserModel> updateProfile(CreateProfileDto profileDto) async {
+  Future<UserProfileModel> updateProfile(CreateProfileDto profileDto) async {
     final url = '${dotenv.env['BASE_URL']}/user/profile';
     const token = '';
 
@@ -113,7 +114,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        return UserModel.fromJson(response.data);
+        return UserProfileModel.fromJson(response.data);
       } else {
         throw ServerException();
       }

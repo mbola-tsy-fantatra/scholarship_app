@@ -27,6 +27,7 @@ class RequestSuggestionItem extends StatelessWidget {
               name: profile.user.username,
               userId: profile.user.id,
               profileUrl: profile.profilePicture,
+              profileId: profile.id,
               mutualFriends: 5,),
             TextButton(
                 style: TextButton.styleFrom(

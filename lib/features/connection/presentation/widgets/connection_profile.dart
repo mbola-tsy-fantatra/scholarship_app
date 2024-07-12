@@ -5,9 +5,10 @@ class ConnectionProfile extends StatelessWidget {
   final String name;
   final int? mutualFriends;
   final String userId;
+  final String? profileId;
   final String? profileUrl;
 
-  const ConnectionProfile({super.key, this.profileUrl, required this.name, this.mutualFriends, required this.userId});
+  const ConnectionProfile({super.key, this.profileUrl, required this.name, this.mutualFriends, required this.userId,this.profileId});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class ConnectionProfile extends StatelessWidget {
           width: 55,
           child: InkWell(
             onTap: () {
-              context.router.pushNamed('/profile/$userId');
+              print('profileId-Conneciton profile : $profileId');
+              context.router.pushNamed('/profile/$profileId');
             },
             child: CircleAvatar(
               backgroundImage: profileUrl != null

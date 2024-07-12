@@ -3,7 +3,6 @@ import 'package:scholariship/features/connection/data/request/connection_reply.d
 import 'package:scholariship/features/connection/data/request/connection_request.dart';
 import 'package:scholariship/features/connection/domain/entities/connection.dart';
 import 'package:scholariship/features/connection/domain/entities/connection_received.dart';
-import 'package:scholariship/features/connection/domain/entities/profile.dart';
 import 'package:scholariship/features/connection/domain/entities/user_profile.dart';
 import '../../../../global/error/failure.dart';
 import '../entities/connection_sender.dart';

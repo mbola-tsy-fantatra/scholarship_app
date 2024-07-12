@@ -21,9 +21,13 @@ class NavigationScreen extends StatelessWidget {
               title: const Text('Scholarship'),
               centerTitle: false,
               actions: <Widget>[
-                const CircleAvatar(
-                  backgroundImage: AssetImage("assets/honami.jpg"),
-
+                GestureDetector(
+                  onTap: () {
+                    context.router.push(PersonalProfileRoute(profileId: "436743")); // Navigate to profile route
+                  },
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage("assets/honami.jpg"),
+                  ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.settings),
