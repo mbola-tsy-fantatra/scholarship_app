@@ -63,5 +63,9 @@ class AppRouter extends $AppRouter {
         path: '/suggestions',
         page: SuggestionRoute.page
     ),
+    AutoRoute(
+        path: '/personal/profile/:profileId',
+        page: PersonalProfileRoute.page
+    ),
   ];
 }

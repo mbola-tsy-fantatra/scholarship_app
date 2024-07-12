@@ -97,7 +97,7 @@ Future<void> init()async {
   );
 
   //DataSource
-  sl.registerLazySingleton<UserRemoteDataSource>(()=> UserRemoteDataSourceImpl( dio: sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(()=> UserRemoteDataSourceImpl( dio: sl(), sharedPreferences: sl()));
 
   //! Feature - Scholarship
   // Bloc
