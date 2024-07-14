@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:scholariship/features/connection/data/datasources/connection_remote_data_sources.dart';
+import 'package:scholariship/features/connection/data/request/connection_reply.dart';
 import 'package:scholariship/features/connection/domain/entities/connection.dart';
 import 'package:scholariship/features/connection/domain/entities/connection_received.dart';
 import 'package:scholariship/features/connection/domain/entities/connection_sender.dart';
+import 'package:scholariship/features/connection/domain/entities/user_profile.dart';
 import 'package:scholariship/features/connection/domain/repository/connection_repository.dart';
 import 'package:scholariship/global/error/failure.dart';
 import '../../../../global/error/exeception.dart';
@@ -51,6 +53,27 @@ class ConnectionRepositoryImpl implements ConnectionRepository{
     try{
       final connectionSent = await remoteDataSources.sendConnectionRequest(connectionRequest);
       return Right(connectionSent);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<UserProfile>>> getConnectionProfile() async{
+    try{
+      final suggestions = await remoteDataSources.getUserProfile();
+      return Right(suggestions);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+
+  }
+
+  @override
+  Future<Either<Failure, void>> replyToRequest(ConnectionReply connectionReply) async{
+    try{
+      final  response = await remoteDataSources.requestReply(connectionReply);
+      return const Right("");
     }on ServerException{
       return Left(ServerFailure());
     }

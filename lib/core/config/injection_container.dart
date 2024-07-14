@@ -12,11 +12,17 @@ import 'package:scholariship/features/auth/presentation/index.dart';
 import 'package:scholariship/features/connection/data/datasources/connection_remote_data_sources.dart';
 import 'package:scholariship/features/connection/data/repository/connection_repository_impl.dart';
 import 'package:scholariship/features/connection/domain/repository/connection_repository.dart';
+import 'package:scholariship/features/connection/domain/usecases/accept_request_use_case.dart';
 import 'package:scholariship/features/connection/domain/usecases/get_connection_request_received.dart';
 import 'package:scholariship/features/connection/domain/usecases/get_connection_request_sent.dart';
+import 'package:scholariship/features/connection/domain/usecases/get_connection_suggestion.dart';
+import 'package:scholariship/features/connection/domain/usecases/reject_request_use_case.dart';
 import 'package:scholariship/features/connection/presentation/index.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_request/connection_request_bloc.dart';
 import 'package:scholariship/features/connection/presentation/manager/connection_sent/connection_sent_bloc.dart';
+import 'package:scholariship/features/connection/presentation/manager/reply_request/reply_bloc.dart';
+import 'package:scholariship/features/connection/presentation/manager/send_request/send_request_bloc.dart';
+import 'package:scholariship/features/connection/presentation/manager/suggestion/suggestion_bloc.dart';
 import 'package:scholariship/features/messages/repositories/conversation_repository.dart';
 import 'package:scholariship/features/messages/repositories/message_repositiory.dart';
 import 'package:scholariship/features/onboarding_profile/reposirtory/profile_repository.dart';
@@ -96,7 +102,7 @@ Future<void> init()async {
   );
 
   //DataSource
-  sl.registerLazySingleton<UserRemoteDataSource>(()=> UserRemoteDataSourceImpl( dio: sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(()=> UserRemoteDataSourceImpl( dio: sl(), sharedPreferences: sl()));
 
   //! Feature - Scholarship
   // Bloc
@@ -127,12 +133,18 @@ Future<void> init()async {
   sl.registerFactory(()=>ConnectionBloc(getConnectionRequest: sl()));
   sl.registerFactory(()=>ConnectionRequestBloc(getConnectionRequestReceived: sl()));
   sl.registerFactory(()=>ConnectionSentBloc(getConnectionRequestSent: sl()));
+  sl.registerFactory(()=>SuggestionBloc(getSuggestion: sl()));
+  sl.registerFactory(()=>SendRequestBloc(sendConnectionRequest: sl()));
+  sl.registerFactory(()=>ReplyBloc(acceptRequestUseCase: sl(), rejectRequestUseCase: sl() ));
 
   //UseCases
   sl.registerLazySingleton(()=>SendConnectionRequest(connectionRepository: sl()));
   sl.registerLazySingleton(()=>GetConnectionRequestReceived(connectionRepository: sl()));
   sl.registerLazySingleton(()=>GetConnectionRequestSent(connectionRepository: sl()));
   sl.registerLazySingleton(()=>GetConnectionRequest(connectionRepository: sl()));
+  sl.registerLazySingleton(()=>GetConnectionSuggestion(repository: sl()));
+  sl.registerLazySingleton(()=>AcceptRequestUseCase(connectionRepository: sl()));
+  sl.registerLazySingleton(()=>RejectRequestUseCase(connectionRepository: sl()));
 
   //Repository
   sl.registerLazySingleton<ConnectionRepository>(()=>ConnectionRepositoryImpl(remoteDataSources: sl()));

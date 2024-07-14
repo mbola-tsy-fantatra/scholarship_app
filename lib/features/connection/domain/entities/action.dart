@@ -1,0 +1,5 @@
+enum ACTION{
+  ACCEPTED,
+  DECLINED,
+  PENDING
+}

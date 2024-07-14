@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:scholariship/features/connection/data/request/connection_request.dart';
 import 'package:scholariship/features/connection/domain/usecases/get_connection_request_received.dart';
 
 import '../../../../../global/utils/map_failure_message.dart';
+import '../../../domain/entities/connection_received.dart';
 
 part 'connection_request_event.dart';
 part 'connection_request_state.dart';
@@ -23,7 +23,7 @@ class ConnectionRequestBloc extends Bloc<ConnectionRequestEvent, ConnectionReque
       response.fold((failure){
         emit(ErrorState(message: mapFailureToMessage(failure)));
       }, (connections){
-        emit(connections);
+        emit(Loaded(connection: connections));
       });
   }
 }

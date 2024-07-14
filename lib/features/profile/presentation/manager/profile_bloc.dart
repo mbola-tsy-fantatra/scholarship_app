@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:scholariship/features/profile/domain/entities/profile.dart';
 import '../../../../core/dto/profile/create_profile_dto.dart';
 import '../../../../global/utils/map_failure_message.dart';
-import '../../domain/entities/user.dart';
+import '../../../connection/domain/entities/user_profile.dart';
 import '../../domain/usecases/create_user_profile.dart';
 import '../../domain/usecases/get_user_profile.dart';
 import '../../domain/usecases/upate_user_profile.dart';
@@ -51,12 +52,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _updateUserProfile(UpdateUserProfileEvent event, Emitter<ProfileState> emit) async {
-    emit(Loading());
-    final response = await updateUserProfile(UpdateParams(profileDto: event.profileDto));
-    response?.fold((failure) {
-      emit(ErrorState(message: mapFailureToMessage(failure)));
-    }, (user) {
-      emit(Loaded(user: user));
-    });
+    // emit(Loading());
+    // final response = await updateUserProfile(UpdateParams(profileDto: event.profileDto));
+    // response?.fold((failure) {
+    //   emit(ErrorState(message: mapFailureToMessage(failure)));
+    // }, (user) {
+    //   emit(Loaded(user: user));
+    // });
   }
 }
