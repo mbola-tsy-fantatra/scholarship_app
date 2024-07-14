@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:scholariship/core/routes/router.gr.dart';
+import 'package:scholariship/features/onboarding_profile/presentation/views/interest_creation_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/injection_container.dart';
@@ -62,7 +63,10 @@ class AppRouter extends $AppRouter {
     AutoRoute(
         path: '/profile-creation/:userId',
         page: ProfileCreationRoute.page
+    ),
+    AutoRoute(
+        path: '/interest-creation',
+        page: InterestRoute.page
     )
-
   ];
 }

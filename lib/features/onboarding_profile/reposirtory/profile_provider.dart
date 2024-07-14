@@ -2,20 +2,24 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:scholariship/features/onboarding_profile/reposirtory/academics_provider.dart';
 import 'package:scholariship/features/onboarding_profile/reposirtory/profile_repository.dart';
 
 
 
 
-class ProfileProvider with ChangeNotifier {
+class ProfileProvider extends ChangeNotifier {
     File? profileFile;
     String? bio;
     DateTime? dateOfBirth;
-    int? countryId;
+    String? countryName;
     List<int>? desiredStudyCountryIds;
     List<int>? academicsInterestIds;
     int? currentStudyLevelId;
-    final ProfileRepository repository;
+    String? currentStudyLevelName;
+    bool isFormFilled = false;
+    Status status = Status.initial;
+    final OnboardingProfileRepository repository;
     final ImagePicker picker = ImagePicker();
 
     ProfileProvider({required this.repository});
@@ -31,7 +35,6 @@ class ProfileProvider with ChangeNotifier {
             throw Exception(e);
         }
     }
-
     Future<void> getImageFromCamera() async {
         try {
             XFile? image = await picker.pickImage(source: ImageSource.camera);
@@ -43,7 +46,9 @@ class ProfileProvider with ChangeNotifier {
             throw Exception(e);
         }
     }
-
+    void updateIsFormFilled() {
+        isFormFilled = countryName != null && currentStudyLevelId != null;
+    }
     void updateBio(String newBio) {
         bio = newBio;
         notifyListeners();
@@ -56,8 +61,9 @@ class ProfileProvider with ChangeNotifier {
         _saveProfileData();
     }
 
-    void updateCountryId(int id) {
-        countryId = id;
+    void updateCountry(String name) {
+        countryName = name;
+        updateIsFormFilled();
         notifyListeners();
         _saveProfileData();
     }
@@ -74,8 +80,10 @@ class ProfileProvider with ChangeNotifier {
         _saveProfileData();
     }
 
-    void updateCurrentStudyLevelId(int id) {
+    void updateCurrentStudyLevel(int id, String name) {
         currentStudyLevelId = id;
+        currentStudyLevelName= name;
+        updateIsFormFilled();
         notifyListeners();
         _saveProfileData();
     }
@@ -84,30 +92,52 @@ class ProfileProvider with ChangeNotifier {
         final profileData = {
             'bio': bio,
             'dateOfBirth': dateOfBirth?.toIso8601String(),
-            'countryId': countryId,
+            'countryName': countryName,
             'desiredStudyCountryIds': desiredStudyCountryIds,
             'academicsInterestIds': academicsInterestIds,
             'currentStudyLevelId': currentStudyLevelId,
             'profilePicturePath': profileFile?.path,
         };
         await repository.saveProfileDataLocally(profileData);
-        await repository.saveProfileDataToBackend(
-            profileFile: profileFile,
-            bio: bio,
-            dateOfBirth: dateOfBirth,
-            countryId: countryId!,
-            desiredStudyCountryIds: desiredStudyCountryIds!,
-            academicsInterestIds: academicsInterestIds!,
-            currentStudyLevelId: currentStudyLevelId!,
-        );
-    }
 
+    }
+    Future<void> saveProfileToBackend() async {
+        try {
+            status = Status.loading;
+            notifyListeners();
+            final profileData = repository.getProfileDataLocally();
+            if (profileData != null) {
+                File? profileFile;
+                if (profileData['profilePicturePath'] != null) {
+                    profileFile = File(profileData['profilePicturePath']);
+                }
+                await repository.saveProfileDataToBackend(
+                    profileFile: profileFile,
+                    bio: profileData['bio'],
+                    dateOfBirth: profileData['dateOfBirth'] != null ? DateTime.parse(profileData['dateOfBirth']) : null,
+                    countryName: profileData['countryName'],
+                    desiredStudyCountryIds: List<int>.from(profileData['desiredStudyCountryIds']),
+                    academicsInterestIds: List<int>.from(profileData['academicsInterestIds']),
+                    currentStudyLevelId: profileData['currentStudyLevelId'],
+                );
+                status = Status.success;
+                notifyListeners();
+            } else {
+                print('No profile data found locally.');
+
+            }
+        } catch (e) {
+            status = Status.failed;
+            notifyListeners();
+            print('Error saving profile to backend: $e');
+        }
+    }
     void loadProfileData() {
         final profileData = repository.getProfileDataLocally();
         if (profileData != null) {
             bio = profileData['bio'];
             dateOfBirth = DateTime.parse(profileData['dateOfBirth']);
-            countryId = profileData['countryId'];
+            countryName = profileData['countryName'];
             desiredStudyCountryIds = List<int>.from(profileData['desiredStudyCountryIds']);
             academicsInterestIds = List<int>.from(profileData['academicsInterestIds']);
             currentStudyLevelId = profileData['currentStudyLevelId'];
