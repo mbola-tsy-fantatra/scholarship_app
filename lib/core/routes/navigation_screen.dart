@@ -26,7 +26,7 @@ class NavigationScreen extends StatelessWidget {
                     context.router.push(PersonalProfileRoute(profileId: "436743")); // Navigate to profile route
                   },
                   child: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/honami.jpg"),
+                    backgroundImage: AssetImage("assets/yor.jpg"),
                   ),
                 ),
                 IconButton(

@@ -25,6 +25,11 @@ import 'package:scholariship/features/connection/presentation/manager/send_reque
 import 'package:scholariship/features/connection/presentation/manager/suggestion/suggestion_bloc.dart';
 import 'package:scholariship/features/messages/repositories/conversation_repository.dart';
 import 'package:scholariship/features/messages/repositories/message_repositiory.dart';
+import 'package:scholariship/features/notifications/data/datasources/notification_remote_data_source.dart';
+import 'package:scholariship/features/notifications/data/repository/notification_repository_impl.dart';
+import 'package:scholariship/features/notifications/domain/repository/notification_repository.dart';
+import 'package:scholariship/features/notifications/domain/usecases/get_notificatiions.dart';
+import 'package:scholariship/features/notifications/presentation/index.dart';
 import 'package:scholariship/features/profile/data/datasources/user_remote_data_source.dart';
 import 'package:scholariship/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:scholariship/features/profile/domain/repository/profile_repository.dart';
@@ -48,6 +53,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/connection/domain/usecases/get_connection_request.dart';
 import '../../features/connection/domain/usecases/send_connection_request.dart';
+import '../services/sse_manager.dart';
 
 final sl = GetIt.instance;
 
@@ -147,6 +153,21 @@ Future<void> init()async {
   //DataSources
   sl.registerLazySingleton<ConnectionRemoteDataSources>(()=>ConnectionRemoteDataSourceImpl(sharedPreferences: sl(), client: sl()));
 
+
+
+  //! Feature - Connection
+  //BLoc
+  sl.registerFactory(()=>NotificationBloc(usecase: sl(), sse: sl()));
+
+  //UseCases
+  sl.registerLazySingleton(()=>GetNotificationUseCase(notificationRepository: sl()));
+
+  //Repository
+  sl.registerLazySingleton<NotificationRepository>(()=>NotificationRepositoryImpl(remoteDataSource: sl()));
+
+  //DataSources
+  sl.registerLazySingleton<NotificationRemoteDataSource>(()=>NotificationRemoteDataSourceImpl(sharedPreferences: sl(), client: sl()));
+
   //External
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
@@ -156,4 +177,5 @@ Future<void> init()async {
     final dio = Dio();
     return dio;
   });
+  sl.registerLazySingleton(() => Sse.connect(uri: Uri.parse('http://192.168.208.149:3000/api/v1/notifications/subscribe')));
 }
