@@ -67,5 +67,17 @@ class AppRouter extends $AppRouter {
         path: '/personal/profile/:profileId',
         page: PersonalProfileRoute.page
     ),
+    AutoRoute(
+        path: '/splash-screen',
+        page: SplashRoute.page
+    ),
+    AutoRoute(
+        path: '/profile-creation/:userId',
+        page: ProfileCreationRoute.page
+    ),
+    AutoRoute(
+        path: '/interest-creation',
+        page: InterestRoute.page
+    )
   ];
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scholariship/core/model/study_level_model.dart';
 import 'package:scholariship/features/onboarding_profile/reposirtory/academics_provider.dart';
-import 'package:scholariship/features/scholariship/data/models/study_level_model.dart';
+
 
 class SelectField extends StatelessWidget {
   final Function(int, String)? onChanged;

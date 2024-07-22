@@ -12,7 +12,6 @@ import 'package:scholariship/features/onboarding_profile/reposirtory/profile_pro
 @RoutePage()
 class InterestScreen extends StatefulWidget {
   const InterestScreen({super.key});
-
   @override
   InterestScreenState createState() => InterestScreenState();
 }

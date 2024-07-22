@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:scholariship/core/model/country_model.dart';
 import 'package:scholariship/features/onboarding_profile/reposirtory/academics_provider.dart';
 import 'package:scholariship/features/onboarding_profile/reposirtory/profile_provider.dart';
-import 'package:scholariship/features/scholariship/data/models/country_model.dart';
+
 
 class CountriesSelect extends StatelessWidget {
   const CountriesSelect({super.key});
