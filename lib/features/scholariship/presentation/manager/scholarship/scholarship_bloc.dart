@@ -26,7 +26,7 @@ class ScholarshipBloc extends Bloc<ScholarshipEvent, ScholarshipState> {
       response?.fold((failure){
         emit(ErrorState(message: mapFailureToMessage(failure)));
       }, (scholarships){
-        emit(Loaded(scholarships: scholarships));
+        emit(Loaded(scholarships: scholarships.reversed.toList()));
       });
   }
   Future<void> _createScholarship(CreateScholarshipEvent event, Emitter<ScholarshipState> emit) async {
