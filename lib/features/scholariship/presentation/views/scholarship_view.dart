@@ -74,6 +74,7 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
         title: Padding(
           padding: const EdgeInsets.only(bottom: 25 ,top: 25),  // Padding vertical autour de la Row
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 flex: 2,
@@ -83,7 +84,7 @@ class _ScholarshipSearchPageState extends State<ScholarshipSearchPage> {
                     controller: queryController,
                     decoration: InputDecoration(
                       labelText: 'Search scholarship',
-                      // border: const OutlineInputBorder(),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
                       prefixIcon: IconButton(
                         icon: const Icon(Icons.search),
                         onPressed: _search,

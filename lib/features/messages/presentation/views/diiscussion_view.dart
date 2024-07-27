@@ -57,12 +57,11 @@ class _DiscussionContainerState extends State<DiscussionContainer> {
   void initState() {
     super.initState();
      messageRepository = Provider.of<MessageRepository>(context, listen: false);
-    messageRepository.sendMessage('chat:conversation:join', {'conversationId': widget.conversationId});
+     messageRepository.sendMessage('chat:conversation:join', {'conversationId': widget.conversationId});
   }
   
   @override
   void dispose() {
-
     super.dispose();
   }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:image_picker/image_picker.dart';
 import 'package:scholariship/core/services/websocket_manager.dart';
 import 'package:scholariship/features/messages/models/conversation.dart';
 import 'package:scholariship/features/messages/models/messages.dart';
@@ -10,6 +11,7 @@ class MessageRepository{
   final SharedPreferences sharedPreferences;
   final StreamController<Conversation?> _conversationStreamController = StreamController<Conversation>.broadcast();
   final StreamController<String> _typingController = StreamController<String>.broadcast();
+  final ImagePicker picker = ImagePicker();
   Stream<String> get typingStream => _typingController.stream;
   
   Conversation? _conversation;
@@ -39,7 +41,6 @@ class MessageRepository{
         print('Error processing data received from socket: $e');
         _conversationStreamController.addError(e);
   }}
-
   void handleMessageReceivedEvent(Map<String, dynamic> data) {
     try {
       print('Message received from socket: $data');

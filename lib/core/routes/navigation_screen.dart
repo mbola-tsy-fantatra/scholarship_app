@@ -41,7 +41,6 @@ class NavigationScreen extends StatelessWidget {
         },
         body: AutoTabsRouter(
           routes: const [
-            HomeRoute(),
             ScholarshipRoute(),
             ConnectionRoute(),
             ConversationListRoute(),
@@ -63,10 +62,6 @@ class NavigationScreen extends StatelessWidget {
                   tabsRouter.setActiveIndex(index);
                 },
                 items: const [
-                  BottomNavigationBarItem(
-                    label: 'Home',
-                    icon: Icon(Icons.home),
-                  ),
                   BottomNavigationBarItem(
                     label: 'Scholarship',
                     icon: Icon(Icons.book),

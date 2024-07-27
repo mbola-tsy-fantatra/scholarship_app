@@ -65,11 +65,11 @@ class ScholarshipItem extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.purple.withOpacity(0.1),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Column(
@@ -87,18 +87,19 @@ class ScholarshipItem extends StatelessWidget {
                 Text(
                   name,
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  softWrap: true,
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            Text('Application date : $startDate - $endDate', style: const TextStyle(fontSize: 16)),
+            Text('Application date : $startDate - $endDate', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
             const SizedBox(height: 10),
             Text(description),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Application period: $applicationStartPeriod'),
+                Text('Application period: $applicationStartPeriod', style: const TextStyle(fontWeight: FontWeight.w700),),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
@@ -119,26 +120,6 @@ class ScholarshipItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end, // Aligns children to the end of the row
               children: [
-                InkWell(
-                  onTap: () {
-                    // Handle share action
-                  },
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Share',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(width: 4),
-                      Icon(
-                        Icons.share_outlined,
-                        size: 24,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 10),
                 InkWell(
                   onTap: () {
                     // Handle save action

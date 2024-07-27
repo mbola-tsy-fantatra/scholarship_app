@@ -1,5 +1,8 @@
 import 'package:scholariship/features/messages/models/user.dart';
 
+enum MediaType {
+  IMAGE
+}
 class Message {
   final String id;
   final String content;
@@ -7,6 +10,10 @@ class Message {
   final String receiverId;
   final DateTime sentAt;
   final String conversationId;
+  final String? url;
+  final String? mediaType;
+  final int?  mediaSize;
+
   final User sender;
 
   const Message({
@@ -17,6 +24,9 @@ class Message {
     required this.sentAt,
     required this.conversationId,
     required this.sender,
+    this.mediaType,
+    this.mediaSize,
+    this.url
   });
 
   factory Message.fromJson(Map<String, dynamic> json) {
@@ -28,6 +38,9 @@ class Message {
       sentAt: DateTime.parse(json['sentAt']),
       conversationId: json['conversationId'],
       sender: User.fromJson(json['sender']),
+      url: json['url'],
+      mediaSize: json['mediaSize'],
+      mediaType: json['mediaType']
     );
   }
 

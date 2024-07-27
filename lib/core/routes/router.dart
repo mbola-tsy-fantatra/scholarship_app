@@ -22,11 +22,8 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: PasswordRecoveryRoute.page),
     AutoRoute(
         path:'/',
-        initial: true,
         page: NavigationRoute.page,
-        guards: [AuthGuard(sl<SharedPreferences>())],
         children: [
-          AutoRoute(page: HomeRoute.page),
           AutoRoute(page: ScholarshipRoute.page),
           AutoRoute(page: ConnectionRoute.page),
           AutoRoute(page: ConversationListRoute.page),
@@ -68,6 +65,7 @@ class AppRouter extends $AppRouter {
         page: PersonalProfileRoute.page
     ),
     AutoRoute(
+        initial: true,
         path: '/splash-screen',
         page: SplashRoute.page
     ),
