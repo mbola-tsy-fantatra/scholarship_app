@@ -14,7 +14,7 @@ class AuthGuard extends AutoRouteGuard {
       resolver.next(true);
     }else{
       // we redirect the user to our login page
-      router.push(const LoginRoute());
+      router.push(const SplashRoute());
     }
   }
   bool _isAuthenticated(){

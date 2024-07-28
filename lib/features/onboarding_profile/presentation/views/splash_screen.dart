@@ -90,7 +90,7 @@ class SplashScreen extends StatelessWidget {
                     const EdgeInsets.only(bottom: 32.0, left: 32, right: 32),
                 child: ButtonWidget(
                   onPressed: () {
-                    context.router.pushNamed('/profile-creation/:userId');
+                    context.router.pushNamed('/register');
                   },
                   label: 'Get started',
                 ),

@@ -32,7 +32,7 @@ class RegisterForm extends StatelessWidget {
     return BlocListener<AuthBloc,AuthState>(
         listener: (BuildContext context, state) {
           if (state is Loaded) {
-            context.router.replaceNamed('/login');
+            context.router.replaceNamed('/profile-creation/:userId');
           }
           if (state is ErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(

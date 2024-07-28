@@ -79,12 +79,10 @@ class AppRouter extends $AppRouter {
     AutoRoute(
         path: '/profile-creation/:userId',
         page: ProfileCreationRoute.page,
-        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/interest-creation',
         page: InterestRoute.page,
-        guards: [AuthGuard(sl<SharedPreferences>())]
     )
   ];
 }
