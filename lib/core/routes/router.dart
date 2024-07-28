@@ -28,7 +28,8 @@ class AppRouter extends $AppRouter {
           AutoRoute(page: ConnectionRoute.page),
           AutoRoute(page: ConversationListRoute.page),
           AutoRoute(page: NotificationRoute.page),
-        ]
+        ],
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/create-scholarship',
@@ -37,7 +38,8 @@ class AppRouter extends $AppRouter {
     ),
     AutoRoute(
         path: '/setting',
-        page:SettingRoute.page
+        page:SettingRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
       page: DiscussionRoute.page,
@@ -46,23 +48,28 @@ class AppRouter extends $AppRouter {
     ),
     AutoRoute(
         path: '/request',
-        page: RequestRoute.page
+        page: RequestRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/request-sent',
-        page: RequestSentRoute.page
+        page: RequestSentRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/profile/:profileId',
-        page: ProfileRoute.page
+        page: ProfileRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/suggestions',
-        page: SuggestionRoute.page
+        page: SuggestionRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/personal/profile/:profileId',
-        page: PersonalProfileRoute.page
+        page: PersonalProfileRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         initial: true,
@@ -71,11 +78,13 @@ class AppRouter extends $AppRouter {
     ),
     AutoRoute(
         path: '/profile-creation/:userId',
-        page: ProfileCreationRoute.page
+        page: ProfileCreationRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     ),
     AutoRoute(
         path: '/interest-creation',
-        page: InterestRoute.page
+        page: InterestRoute.page,
+        guards: [AuthGuard(sl<SharedPreferences>())]
     )
   ];
 }
