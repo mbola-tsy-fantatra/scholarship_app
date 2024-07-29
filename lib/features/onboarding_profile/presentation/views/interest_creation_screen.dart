@@ -28,7 +28,7 @@ class InterestScreenState extends State<InterestScreen> {
 
     if (profileProvider.status == Status.success) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        context.router.replace(const HomeRoute());
+        context.router.pushNamed('/');
       });
     } else if(profileProvider.status == Status.failed) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

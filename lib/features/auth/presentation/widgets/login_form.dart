@@ -31,7 +31,7 @@ class LoginForm extends StatelessWidget {
           if(state.hasProfile){
             context.router.replaceNamed('/');
           }else{
-            context.router.replaceNamed('/creation-profile');
+            context.router.replaceNamed('/profile-creation/:userId');
           }
 
         }
