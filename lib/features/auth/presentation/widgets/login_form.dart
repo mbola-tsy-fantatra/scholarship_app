@@ -28,7 +28,12 @@ class LoginForm extends StatelessWidget {
     return BlocListener<AuthBloc,AuthState>(
       listener: (BuildContext context, state) {
         if (state is Loaded) {
-          context.router.replaceNamed('/');
+          if(state.hasProfile){
+            context.router.replaceNamed('/');
+          }else{
+            context.router.replaceNamed('/creation-profile');
+          }
+
         }
         if (state is ErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(

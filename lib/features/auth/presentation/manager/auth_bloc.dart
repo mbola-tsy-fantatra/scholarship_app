@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:scholariship/features/auth/domain/entities/auth_response.dart';
 import '../../../../global/utils/map_failure_message.dart';
 import '../../domain/repository/auth_repository.dart';
 
@@ -16,11 +17,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLogin(Login event, Emitter<AuthState> emit)async {
       emit(Loading());
-      final response = await authRepository.login(email: event.email, password: event.password);
+      final  response = await authRepository.login(email: event.email, password: event.password);
       response.fold((failure){
         emit(ErrorState(message:mapFailureToMessage(failure) ));
       }, (authResponse) async {
-        emit(Loaded());
+        emit(Loaded(hasProfile: authResponse.hasProfile));
       });
   }
 
@@ -30,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     response.fold((failure){
       emit(ErrorState(message:mapFailureToMessage(failure) ));
     }, (right){
-      emit(Loaded());
+      emit(const Loaded());
     });
   }
 }

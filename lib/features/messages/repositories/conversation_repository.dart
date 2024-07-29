@@ -33,11 +33,7 @@ class ConversationRepository {
           final conversation = Conversation.fromJson(convJson as Map<String, dynamic>);
           _conversations.add(conversation);
         }
-        _conversations.sort((a, b) {
-          DateTime lastMessageA = a.messages.isNotEmpty ? a.messages.first!.sentAt : DateTime(0);
-          DateTime lastMessageB = b.messages.isNotEmpty ? b.messages.first!.sentAt : DateTime(0);
-          return lastMessageB.compareTo(lastMessageA);
-        });
+
 
         _conversationStreamController.add(_conversations);
       } else {

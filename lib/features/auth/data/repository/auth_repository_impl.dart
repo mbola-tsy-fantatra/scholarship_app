@@ -22,6 +22,7 @@ class AuthRepositoryImpl implements AuthRepository{
        await sharedPreferences.remove('refresh_token');
        await sharedPreferences.remove('user_id');
        await sharedPreferences.setString('access_token', authResponse.access_token);
+      await sharedPreferences.setString('has_profile', authResponse.hasProfile ? "1" : "0");
        await sharedPreferences.setString('refresh_token', authResponse.refresh_token);
        await sharedPreferences.setString('user_id', authResponse.userId);
        await di.sl<SocketManager>().updateAccessToken(authResponse.access_token);

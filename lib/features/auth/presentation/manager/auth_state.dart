@@ -11,12 +11,12 @@ class Empty extends AuthState {
 
 class Loaded extends AuthState {
   // final String access_token;
-  // final String refresh_token;
+ final bool hasProfile;
 
-  // const Loaded({required this.access_token, required this.refresh_token});
+  const Loaded({this.hasProfile = true});
   @override
-  // List<Object?> get props => [access_token, refresh_token];
-  List<Object?> get props => [];
+  List<Object?> get props => [hasProfile];
+
 }
 class Loading extends AuthState {
   @override
