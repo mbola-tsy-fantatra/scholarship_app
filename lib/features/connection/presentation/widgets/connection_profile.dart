@@ -26,7 +26,8 @@ class ConnectionProfile extends StatelessWidget {
             child: CircleAvatar(
               backgroundImage: profileUrl != null
                   ? const AssetImage('assets/honami.jpg')
-                  : const AssetImage('assets/honami.jpg') as ImageProvider,
+                  : NetworkImage('https://ui-avatars.com/api/?name=$name') as ImageProvider
+              ,
               onBackgroundImageError: (_, __) => const Icon(Icons.error),
               child: profileUrl == null
                   ? const Icon(Icons.person)
