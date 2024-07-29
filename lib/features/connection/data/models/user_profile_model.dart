@@ -8,8 +8,8 @@ import '../../domain/entities/user_profile.dart';
 class UserProfileModel extends UserProfile {
   const UserProfileModel({
     required String id,
-    required String bio,
-    required String profilePicture,
+    String? bio,
+    String? profilePicture,
     DateTime? dateOfBirth,
     required int countryId,
     required int currentStudyLevelId,

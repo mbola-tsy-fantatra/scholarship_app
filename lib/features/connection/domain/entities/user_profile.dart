@@ -7,7 +7,7 @@ import '../../../../core/entity/user.dart';
 
 class UserProfile extends Equatable{
   final String id;
-  final String bio;
+  final String? bio;
   final String? profilePicture;
   final DateTime? dateOfBirth;
   final int countryId;
@@ -23,7 +23,7 @@ class UserProfile extends Equatable{
 
   const UserProfile({
     required this.id,
-    required this.bio,
+    this.bio,
     this.profilePicture,
     this.dateOfBirth,
     required this.countryId,
