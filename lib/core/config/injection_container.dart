@@ -30,6 +30,7 @@ import 'package:scholariship/features/notifications/data/repository/notification
 import 'package:scholariship/features/notifications/domain/repository/notification_repository.dart';
 import 'package:scholariship/features/notifications/domain/usecases/get_notificatiions.dart';
 import 'package:scholariship/features/notifications/presentation/index.dart';
+import 'package:scholariship/features/onboarding_profile/reposirtory/profile_repository.dart';
 import 'package:scholariship/features/profile/data/datasources/user_remote_data_source.dart';
 import 'package:scholariship/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:scholariship/features/profile/domain/repository/profile_repository.dart';
@@ -62,6 +63,7 @@ Future<void> init()async {
   sl.registerLazySingleton<SocketManager>(() => SocketManager(sharedPreferences: sl()));
   sl.registerLazySingleton<ConversationRepository>(() => ConversationRepository(socketManager: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton<MessageRepository>(() => MessageRepository(socketManager: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton<OnboardingProfileRepository>(() => OnboardingProfileRepository(httpClient: sl(), sharedPreferences: sl()));
 
   //)
   //! Feature - Auth

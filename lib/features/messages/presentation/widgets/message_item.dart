@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:scholariship/core/utils/date_format_utils.dart';
 import 'package:scholariship/features/messages/models/messages.dart';
 
@@ -39,7 +40,7 @@ class MessageItem extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 padding: const EdgeInsets.all(8.0),
                 child: Image.network(
-                  message.url!,
+                  dotenv.env['SOCKET_URL']! + message.url!,
                   width: width * 0.5, // Adjust size as needed
                   height: width * 0.5, // Adjust size as needed
                   fit: BoxFit.cover,
