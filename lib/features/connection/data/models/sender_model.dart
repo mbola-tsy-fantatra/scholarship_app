@@ -7,7 +7,7 @@ import '../../domain/entities/sender.dart';
 class SenderModel extends Sender {
   const SenderModel({
     required String username,
-    required Profile profile,
+    Profile? profile,
   }) : super(
     username: username,
     profile: profile,
@@ -16,7 +16,7 @@ class SenderModel extends Sender {
   factory SenderModel.fromJson(Map<String, dynamic> json) {
     return SenderModel(
       username: json['username'],
-      profile: ProfileModel.fromJson(json['profile']),
+      profile: json['profile'] != null ? ProfileModel.fromJson(json['profile']) : null,
     );
   }
 }

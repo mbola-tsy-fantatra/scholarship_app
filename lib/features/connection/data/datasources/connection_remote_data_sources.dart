@@ -40,6 +40,7 @@ class ConnectionRemoteDataSourceImpl implements ConnectionRemoteDataSources{
       },
     );
     if (response.statusCode == 200) {
+      print(response.body);
       List<dynamic> jsonResponse = jsonDecode(response.body);
       return jsonResponse.map((data) => ConnectionReceivedModel.fromJson(data)).toList();
     } else {

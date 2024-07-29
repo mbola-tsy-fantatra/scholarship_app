@@ -24,7 +24,7 @@ class RequestReceivedItem extends StatelessWidget {
             ConnectionProfile(
               name: connection.sender.username,
               userId: connection.senderId,
-              profileUrl: connection.sender.profile.profilePicture,
+              profileUrl: connection.sender.profile?.profilePicture,
               mutualFriends: 5,
             ),
             if (connection.status == "PENDING")

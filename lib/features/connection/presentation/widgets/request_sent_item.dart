@@ -21,7 +21,7 @@ class RequestSentItem extends StatelessWidget {
               name: connectionSender.receiver.username,
               userId: "1",
               mutualFriends: 5,
-              profileUrl: connectionSender.receiver.profile.profilePicture,
+              profileUrl: connectionSender.receiver.profile?.profilePicture,
             ),
             TextButton(
               style: TextButton.styleFrom(
